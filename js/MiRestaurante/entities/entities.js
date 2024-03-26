@@ -357,3 +357,9 @@ class Coordinate {
 }
 
 
+//exporto 
+export {
+    Dish, Category, Allergen, Menu, Restaurant, Coordinate,
+};
+  
+

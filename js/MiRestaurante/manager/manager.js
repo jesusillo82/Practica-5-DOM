@@ -1,4 +1,7 @@
-
+/* El manager será la parte correspondiente al MODELO de nuestro patrón MVC 
+puesto que aqui que se encuentran las estructuras de datos ( distintis arrrays) que necesitamos
+a las cuales accederemos desde el CONTROLADOR
+*/
 
 /* El manager implementará un objeto que mantendrá las relaciones entre las distintas entidades del restaurante 
 - de esta forma nos permite simplificar al máximo las entidades creando por tanto objetos mas sencillos
@@ -1278,6 +1281,13 @@ const Manager = (function () {
 
 
 }());
+
+//exporto modulo
+export default Manager;
+export {
+    Dish, Category, Allergen, Menu, Restaurant, Coordinate,
+} from '../entities/entities.js';
+
 
 
 
