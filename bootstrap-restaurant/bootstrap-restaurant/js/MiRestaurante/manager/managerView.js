@@ -1,4 +1,10 @@
 /* parte VISTA del patrón MODELO-VISTA-CONTROLADOR */
+
+
+/* quito parte de shoping cart 
+
+
+
 const EXCECUTE_HANDLER = Symbol('excecuteHandler');
 
 class ManagerView {
@@ -408,4 +414,38 @@ class ManagerView {
   }
 }
 
+export default ManagerView;
+
+*/
+
+
+// vista modelo Manager
+class ManagerView{
+
+  constructor(){
+
+    // parte del HTML ESTATICO del index.html que usare habitualmente
+    // elemento main
+    this.main = document.getElementsByTagName('main')[0];
+    //elemento categories para mostrarlas
+    this.categories = document.getElementById('categories');
+    //elemento menu
+    this.menu = document.querySelector('.navbar-nav');
+
+  }
+
+  // 4 creamos BIND una vez creados en el CONTROLLER el metodo init onInit y su manejador handleInit
+
+  bindInit(handler) {
+    document.getElementById('init').addEventListener('click', (event) => {
+      this[EXCECUTE_HANDLER](handler, [], 'body', { action: 'init' }, '#', event);
+    });
+    document.getElementById('logo').addEventListener('click', (event) => {
+      this[EXCECUTE_HANDLER](handler, [], 'body', { action: 'init' }, '#', event);
+    });
+  }
+
+  //una vez creado lo invocamos desde el constructor del CONTROLLER
+
+}
 export default ManagerView;

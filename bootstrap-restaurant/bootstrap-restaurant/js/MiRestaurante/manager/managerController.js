@@ -1,9 +1,13 @@
 /* Controlador del patrón VISTA-MODELO-CONTROLADOR
 */
+/*
 import {
     Laptop, Camera, Smartphone, Tablet,
   } from './manager.js';
   
+  */
+
+  /*
   const MODEL = Symbol('ShoppingCartModel');
   const VIEW = Symbol('ShoppingCartView');
   const LOAD_MANAGER_OBJECTS = Symbol('Load Manager Objects'); //variable privada
@@ -12,6 +16,9 @@ import {
     constructor(model, view) {
       this[MODEL] = model;
       this[VIEW] = view;
+
+      //comprobacion funcionamiento
+      alert();
   
       this.onLoad(); //cargamos
       this.onInit(); //cargamos
@@ -185,4 +192,130 @@ import {
   }
   
   export default ManagerController;
+  */
+
+  //1 variables privadas, lo que viene entre '' es solo a titulo descriptivo
+  const MODEL = Symbol('ShoppingCartModel');
+  const VIEW = Symbol('ShoppingCartView');
+  //2 carga de objetos
+  const LOAD_MANAGER_OBJECTS = Symbol('Load Manager Objects'); 
+
+  //1 clase
+  class ManagerController {
+    constructor(model, view) {
+      this[MODEL] = model;
+      this[VIEW] = view;
+
+      this.onLoad(); // 3 ejecuto metodo de carga dentro del constructor, luego pintaremos en VISTA
+      this.onInit(); // 4 ejecuto metodo inicio
+      this[VIEW].bindInit(this.handleInit); // 5 metodo bindInit lo creo en VISTA y ejecuto desde aqui
+
+      //comprobacion funcionamiento
+      
+    }
+
+    //2 metodo privado[] de carga, esto normalmente se hace desde el servidor
+    [LOAD_MANAGER_OBJECTS]() {
+
+      /*
+      a 3 categorías, con 4 platos en cada categoría.
+      b. 4 alergenos.
+      c. 3 menús. Al menos 3 platos en cada menú.
+      d. 3 restaurantes.
+
+      */
+
+      // a) creo 3 categorias
+      /*p1 = Manager.getInstance().createCategory('entrante', 'Categoria que hace referencia a pequeños platos previos al primerPlato');
+       asi lo hacia en la practica 4, ahora this[MODEL] contiene Manager.getInstance()*/
+      const categoriaPrimer = this[MODEL].createCategory('primerPlato', 'siempre tendra ensalada, pasta o arroz');
+      const categoriaSegundo = this[MODEL].createCategory('segundoPlato', 'siempre tendra un pescado y una carne');
+      const categoriaPostre = this[MODEL].createCategory('postre', 'siempre habra un postre casero');
+
+      // a) creo platos 
+      const plato1 = this[MODEL].createDish('macarrones', 'macarrones con tomates', ['tomate', 'carne picada'], 'https://via.placeholder.com/258x172.jpg?text=macarrones');
+      const plato2 = this[MODEL].createDish('sopa pescado', 'de temporada', ['pescaado temporada', 'fideos', 'repollo', 'cebolla', 'apio'], 'https://via.placeholder.com/258x172.jpg?text=sopaPescado');
+      const plato3 = this[MODEL].createDish('solomillo', 'a la pimienta', ['solomillo', 'nata', 'cebolla'], 'https://via.placeholder.com/258x172.jpg?text=solomilloPimienta');
+      const plato4 = this[MODEL].createDish('helado a la albahaca', '2 bolas de limon', ['helado limon', 'albahaca', 'azucar'], 'https://via.placeholder.com/258x172.jpg?text=heladoAlbahaca');
+      const plato5 = this[MODEL].createDish('frutaVariada', 'distintas frutas', ['naranja', 'platano'], 'https://via.placeholder.com/258x172.jpg?text=frutaVariada');
+      const plato6 = this[MODEL].createDish('ensalada de pollo', 'ensalada al estilo gallego', ['lechuga', 'tomate', 'pollo'], 'https://via.placeholder.com/258x172.jpg?text=EnsaladaPollo');
+      const plato7 = this[MODEL].createDish('bizcocho de la casa', 'casero', ['bizcocho', 'sirope naranja'], 'https://via.placeholder.com/258x172.jpg?text=bizcocho');
+      const plato8 = this[MODEL].createDish('lubina', 'a la espalda', ['lubina', 'sal', 'limon'], 'https://via.placeholder.com/258x172.jpg?text=lubina');
+      const plato9 = this[MODEL].createDish('entrecot', 'al gusto', ['entrecot', 'sal'], 'https://via.placeholder.com/258x172.jpg?text=entrecot');
+      
+      // a) añado 4 platos a cada categoria
+
+      //CATEGORIA primer plato
+      this[MODEL].assignCategoryToDish(categoriaPrimer,plato1,plato2,plato6);
+      //CATEGORIA segundo plato
+      this[MODEL].assignCategoryToDish(categoriaSegundo,plato3,plato8,plato9);
+      //CATEGORIA postre
+      this[MODEL].assignCategoryToDish(categoriaPostre,plato4,plato5,plato7);
+
+
+      // b) creo 4 alérgenos
+      const alergeno1 = this[MODEL].createAllergen('gluten', ' es una proteína que se encuentra en el trigo, la cebada, el centeno y a veces la avena, ');
+      const alergeno2 = this[MODEL].createAllergen('crustaceo', ' Cangrejos, langostas, gambas, langostinos, carabineros, cigalas, etc');
+      const alergeno3 = this[MODEL].createAllergen('pescado', ' ademas del pescado la Gelatina de pescado utilizada como soporte de vitaminas o preparados de carotenoides.');
+      const alergeno4 = this[MODEL].createAllergen('cacahuete', ' se encuentra además en semillas, pasta y aceites, se puede encontrar en galletas, chocolates, postres, salsas, etc. ');
+      // c) creo 3 menús. 
+      const menu1 = this[MODEL].createMenu('semana Santa', ' constara de primer plato, segundo plato, postre, pan y una bebida,con opción de vigilia, precio 35 euros,');
+      const menu2 = this[MODEL].createMenu('diario', ' constara de primer plato, segundo plato, postre, pan y una bebida, precio 15 euros');
+      const menu3 = this[MODEL].createMenu('navidad', ' constara de dos entrantes, primer plato, segundo plato, postre, pan y dos consumiciones y una copa, precio 50 euros');
+      // c) añado 3 platos a cada menu
+      this[MODEL].assignDishToMenu(menu1,plato1,plato3,plato5);
+      this[MODEL].assignDishToMenu(menu2,plato6,plato2,plato4);
+      this[MODEL].assignDishToMenu(menu3,plato1,plato2,plato7);
+
+      // d) creo 3 restaurantes
+      const restaurante1 = this[MODEL].createRestaurant('El Vergel', ' con capacidad para 100 comensales', this[MODEL].createCoordinate(20, 30));
+      const restaurante2 = this[MODEL].createRestaurant('Casa Lucia', ' con capacidad para 70 comensales', this[MODEL].createCoordinate(20, 60));
+      const restaurante3 = this[MODEL].createRestaurant('El Patio', ' con capacidad para 80 comensales', this[MODEL].createCoordinate(30, 30));
+      
+    }
+
+    // 3 añado evento de carga
+
+    /*Al cargarse la página, debemos mostrar en la zona central todas las categorías que
+    tengamos disponibles. Además, debe haber un menú con los enlaces a dichas categorías.
+    El enlace de inicio de la página deberá mostrar esta distribución nuevamente. */
+    onLoad = () => {
+      //carga objetos
+      this[LOAD_MANAGER_OBJECTS](); // cargo todos los objetos creados
+      alert("Los objetos han sido cargados al Manager");
+      
+    };
+
+    //4 +++++++++++++++++++++++++++++ INIT Y MANEJADOR PARA EL INIT
+    
+    //carga de inicio debera ser invocado desde constructor
+    onInit = () => {
+
+      alert("iniciamos el Manager");
+
+      
+      this[VIEW].showCategories(this[MODEL].categories);
+      this[VIEW].bindProductsCategoryList(
+        this.handleProductsCategoryList,
+        
+
+      );
+      
+    };
+
+    handleInit = () => { //manejador de inicio, en la VISTA definimos su metodo bind para darle funcionalidad
+      this.onInit();
+    };
+
+    // una vez creado estos dos metodos vamos a la VISTA para crear su correspondiente BIND
+    //+++++++++++++++++++++++++++ */
+
+
+
+  } //fin class
+
+  export default ManagerController;
+
+
+
   

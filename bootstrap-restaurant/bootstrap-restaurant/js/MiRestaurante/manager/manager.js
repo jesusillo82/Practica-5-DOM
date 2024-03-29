@@ -1,3 +1,31 @@
+
+/*importo excepciones genereicas
+*/
+import {
+    BaseException,
+    InvalidAccessConstructorException,
+    EmptyValueException,
+    InvalidValueException,
+    AbstractClassException,
+  } from '../exceptions.js';
+
+  /*importo clases de entidad */
+  import {
+    Dish, Category, Allergen, Menu, Restaurant, Coordinate,
+  } from '../entities/entities.js';
+  
+  
+  /* en manager de pablo
+  import { SortedMap } from './sortedmap.js';
+  */
+
+
+
+
+
+
+
+
 /* El manager será la parte correspondiente al MODELO de nuestro patrón MVC 
 puesto que aqui que se encuentran las estructuras de datos ( distintis arrrays) que necesitamos
 a las cuales accederemos desde el CONTROLADOR
@@ -1250,6 +1278,15 @@ const Manager = (function () {
             }
             return restaurant;
         }
+
+        //añado nuevo metodo createCoordinate para no tener que importar los constructores desde el managerController
+        createCoordinate(latitude, longitude) {
+        
+            let coordinate = new Coordinate(latitude,longitude);
+
+            return coordinate;
+        }
+
 
     }
 

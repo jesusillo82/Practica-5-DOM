@@ -68,6 +68,7 @@
 ================================================== -->
 
 <body>
+  <!--menu navegacion superior-->
   <div class="navbar-wrapper">
     <div class="container">
 
@@ -80,11 +81,22 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">Mi Restaurante</a>
+
+            <!-- añado id logo a Mi Restaurante-->
+            <a id="logo"   class="navbar-brand" href="index.html">Mi Restaurante</a>
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
+
+
+              <!-- MODIFICO ESTA PARTE PARA ADAPTAR A LA TUTORIA
               <li class="active"><a href="index.html">Home</a></li>
+              -->
+              
+              <li class="active">
+                <a id="init"  href="#">Inicio</a>
+              </li>
+
               <li><a href="enunciado.html">Enunciado</a></li>
               <li><a href="enunciado.html">Alérgenos</a></li>
               <li><a href="contact.html">Menús</a></li>
@@ -187,6 +199,7 @@
 
   </div>
 
+  <!-- div central cont titulo y descripcion-->
   <div class="mainTitle">
     <div class="container">
       <h1>Restaurante</h1>
@@ -204,31 +217,39 @@
 
   <div class="container marketing">
     <!-- Three columns of text below the carousel -->
+    <!-- muestra 3 platos en 3 columnas, uno por columna parte central-->
     <div class="row">
+      
+      <!-- div plato-->
       <div class="col-lg-4">
         <img class="img-circle" src="themes/assets/images/nepali-momo.png" alt="Generic placeholder image">
         <h2>Nepalese MOMO</h2>
         <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies</p>
         <p><a class="btn btn-default" href="#" role="button">&pound; 2.2 Add to cart &raquo;</a></p>
       </div><!-- /.col-lg-4 -->
+      
+      
+      <!-- div plato-->
       <div class="col-lg-4">
         <img class="img-circle" src="themes/assets/images/burger.png" alt="Generic placeholder image">
         <h2>Burger</h2>
         <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. </p>
         <p><a class="btn btn-default" href="#" role="button">&pound;5 Add to cart &raquo;</a></p>
       </div><!-- /.col-lg-4 -->
+
+      <!-- div plato-->
       <div class="col-lg-4">
         <img class="img-circle" src="themes/assets/images/gorkha-special-chicken.png" alt="Lam Tikka">
         <h2>Gurkha Chicken</h2>
         <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. </p>
         <p><a class="btn btn-default" href="#" role="button">&pound;4 Add to cart &raquo;</a></p>
       </div><!-- /.col-lg-4 -->
+
+
     </div><!-- /.row -->
   </div>
 
-
-
-
+  <!-- div tras los 3 platos en zona central con informacion de la seccion siguiente-->
   <div class="introSection">
     <div class="container">
       <div class="row">
@@ -245,25 +266,42 @@
 
 
 
-
+  <!-- div de tipo carrusel desplazando platos de izquierda a derecha-->
 
   <div class="container marketing">
-    <h2 class="itemsTitle">Breakfast</h2>
+
+    <!-- carrusel de categoria DESAYUNO-->
+    <h2 class="itemsTitle">Breakfast</h2><!-- esta clase cambia a mayuscula por ser titulo-->
     <div id="myCarousel1" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
+      
+      
+      
+      <!-- ¿ TAL VEZ ENTRADA DE OBJETOS AL CARRUSEL???-->
       <div class="carousel-inner">
+        
+        
+        
+        
         <div class="item active">
           <div class="row">
+
+            <!-- muestra plato SALADOS-->
             <div class="col-lg-4">
               <img src="themes/assets/images/salate.png" alt="Generic placeholder image">
               <h4>Salates</h4>
+              <!-- boton con enlace para añadir al carrito-->
               <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
             </div><!-- /.col-lg-4 -->
+
+            <!-- muestra plato MEAL-->
             <div class="col-lg-4">
               <img src="themes/assets/images/burger.png" alt="Generic placeholder image">
               <h4>Meal</h4>
               <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
             </div><!-- /.col-lg-4 -->
+
+            <!-- muestra plato DRINK-->
             <div class="col-lg-4">
               <img src="themes/assets/images/drinks.png" alt="Generic placeholder image">
               <h4>Drink</h4>
@@ -272,6 +310,14 @@
           </div><!-- /.row -->
 
         </div>
+
+        <!-- PARTE CORRESPONDIENTE AL CARRUSEL
+        
+        - define las veces que se mostraran nuestros productos
+        - cuando damos a la izquierda o derecha aparecera otro bloque  
+        -->
+
+        <!-- bloque siguiente a mostrar con los tres items-->
         <div class="item">
           <div class="row">
             <div class="col-lg-4">
@@ -290,8 +336,9 @@
               <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
             </div><!-- /.col-lg-4 -->
           </div><!-- /.row -->
-
         </div>
+
+        <!-- otro bloque siguiente a mostrar con los tres items-->
         <div class="item">
           <div class="row">
             <div class="col-lg-4">
@@ -312,12 +359,18 @@
           </div><!-- /.row -->
         </div>
       </div>
+
+      <!--contoladores del carrusel izquierda y derecha flechas-->
       <a class="left carousel-control" href="#myCarousel1" data-slide="prev"><span
           class="glyphicon glyphicon-chevron-left"></span></a>
       <a class="right carousel-control" href="#myCarousel1" data-slide="next"><span
           class="glyphicon glyphicon-chevron-right"></span></a>
     </div><!-- /.carousel -->
   </div>
+
+  <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                ALMUERZO
+  -->
 
   <div class="container marketing">
     <h2 class="itemsTitle">Lunch</h2>
@@ -391,6 +444,12 @@
     </div><!-- /.carousel -->
   </div>
 
+
+
+   <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                CENA
+  -->
+
   <div class="container marketing">
     <h2 class="itemsTitle">Dinner</h2>
     <div id="myCarousel3" class="carousel slide" data-ride="carousel">
@@ -398,16 +457,22 @@
       <div class="carousel-inner">
         <div class="item active">
           <div class="row">
+
+            <!--plato pollo-->
             <div class="col-lg-4">
               <img src="themes/assets/images/chicken_fry.png" alt="Generic placeholder image">
               <h4>Chicken</h4>
               <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
             </div><!-- /.col-lg-4 -->
+
+            <!--plato arroz-->
             <div class="col-lg-4">
               <img src="themes/assets/images/rice.png" alt="Generic placeholder image">
               <h4>Rice</h4>
               <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
             </div><!-- /.col-lg-4 -->
+
+            <!--plato bebida-->
             <div class="col-lg-4">
               <img src="themes/assets/images/drinks.png" alt="Generic placeholder image">
               <h4>Drink</h4>
@@ -463,7 +528,8 @@
     </div><!-- /.carousel -->
   </div>
 
-
+<!-- penultima seccion que muestra 3 platos especiales con su descripcion
+y acceso al menu principal-->
   <div class="highlightSection">
     <div class="container">
       <div class="row">
@@ -494,7 +560,7 @@
   </div>
 
 
-
+  <!-- parte informativa -->
   <div class="introSection">
     <div class="container">
       <div class="row">
@@ -543,6 +609,7 @@
   </div>
 
 
+  <!-- carrusel que se desplaza solo sin darle nosotros a ninguna flecha-->
   <div class="container marketing">
     <div id="myCarousel4" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
@@ -613,13 +680,16 @@
   <script src="themes/dist/js/bootstrap.min.js"></script>
   <script src="themes/assets/js/holder.js"></script>
 
-  <!--script tarea 4 Manager-->
-  <script src="js/exceptions.js"></script>
-  <script src="js/entities.js"></script>
-  <script src="js/restaurantsManager.js"></script>
-  <script src="js/test.js"></script>
 
-
+  <!-- Importaciones para el proyecto Mi tienda, es un módulo
+	al ser un modulo implica que se instanciara el objeto que me haga falta,los módulos
+	implementan internamente un single lo que quiere decir que aunque se importe un módulo tres 
+	o cuatro veces en distintas partes de la aplicación sólo se cargará una única vez
+	y los objetos se instanciarán una única vez
+    - dentro de miRestaurante.js tengo import ManagerApp from './manager/managerApp.js'
+    el cual accedera al resto de los script del manager,vita,controlador;
+  -->
+	<script src="./js/MiRestaurante/miRestaurante.js" type="module"></script>
 
 
 </body>

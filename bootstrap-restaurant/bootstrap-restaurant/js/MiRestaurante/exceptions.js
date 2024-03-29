@@ -36,4 +36,22 @@ class InvalidValueException extends BaseException {
   }
 }
 
+class AbstractClassException extends BaseException {
+  constructor(className, fileName, lineNumber) {
+    super(`Error: The class  ${className} is abstract.`, fileName, lineNumber);
+    this.className = className;
+    this.name = 'AbstractClassException';
+  }
+}
+
+
+
+export {
+  BaseException,
+  InvalidAccessConstructorException,
+  EmptyValueException,
+  InvalidValueException,
+  AbstractClassException,
+};
+
 

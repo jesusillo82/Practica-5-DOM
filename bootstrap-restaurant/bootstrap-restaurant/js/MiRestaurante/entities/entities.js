@@ -1,5 +1,13 @@
 /*Entidades de la práctica*/
 
+import {
+    BaseException,
+    InvalidAccessConstructorException,
+    EmptyValueException,
+    InvalidValueException,
+    AbstractClassException,
+  } from '../exceptions.js';
+
 // clase plato DISH ------------------------------
 class Dish {
     // Campos privados
@@ -357,7 +365,7 @@ class Coordinate {
 }
 
 
-//exporto 
+//exporto clases
 export {
     Dish, Category, Allergen, Menu, Restaurant, Coordinate,
 };

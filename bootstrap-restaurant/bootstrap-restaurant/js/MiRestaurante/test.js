@@ -1,3 +1,6 @@
+import Manager, {
+  Dish, Category, Allergen, Menu, Restaurant, Coordinate,
+} from './manager/manager.js';
 
 
 // ------------------------------funcion test entidades-------------------------
@@ -1130,4 +1133,6 @@ function creacionEntidadesTest() {
 }
 
 
-window.onload = creacionEntidadesTest;
+export {
+  creacionEntidadesTest
+};
