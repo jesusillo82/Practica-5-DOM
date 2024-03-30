@@ -1,4 +1,6 @@
-/*Entidades de la práctica*/
+/*Entidades de la práctica tarea 4
+- añado nuevo atributo url a la entidad Category para que muestre una imagen
+*/
 
 import {
     BaseException,
@@ -87,13 +89,16 @@ class Dish {
 
 
 // Clase categorias Category ------------------------------
+//añado nuevo atributo imagen para practica 5
 class Category {
     // Campos privados
     #name; //obligatorio
 
     #description;
 
-    constructor(name, description) {
+    #url; // ruta donde se ubica imagen del plato
+
+    constructor(name, description, url) {
         // La función se invoca con el operador new
         if (!new.target) throw new InvalidAccessConstructorException(); 
 
@@ -103,6 +108,7 @@ class Category {
         // Definición de atributos privados del objeto
         this.#name = name;
         this.#description = description;
+        this.#url = url; //nuevo atributo
         
 
         // Propiedades de acceso a los atributos privados enumerables.
@@ -127,12 +133,23 @@ class Category {
                 this.#description = value;
             },
         });
+
+        // añado para práctica 5
+        Object.defineProperty(this, 'url', {
+            enumerable: true,
+            get() {
+                return this.#url;
+            },
+            set(value) {
+                this.#url = value;
+            },
+        });
     }
 
 
-    // Métodos públicos
+    // Métodos públicos, modifico para practica 5
     toString() {
-        return `name: ${this.#name} description: ${this.#description}`;
+        return `name: ${this.#name} description: ${this.#description} image: ${this.#url}`;
     }
 }
 

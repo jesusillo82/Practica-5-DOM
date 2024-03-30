@@ -107,7 +107,7 @@ a:hover{color:#eee}
 .marketing img{max-width:100%}
 .carousel-caption {color: #000000;}
 .carousel-caption  h1{background-color: #eb4800;color: #fff;display:inline-block;padding:4px 18px; width: auto;-ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=80)';opacity: 0.8;}
-.dsc {background-color: #757575;color: #fff;display: inline-block;padding: 4px 18px; width: auto;-ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=80)';opacity: 0.8;}
+.dsc {background-color: #757575;color: #fff;display: inline-block;padding: 4px 18px; width: auto; -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=80)';opacity: 0.8;}
 .highlightSection{padding:28px 0}
 .highlightSection img{padding:0 0 28px 0}
 .highlightSection .media{background-color: #efefef;border: 1px solid #efefef;color: #939393;padding: 10px;text-align: center;}

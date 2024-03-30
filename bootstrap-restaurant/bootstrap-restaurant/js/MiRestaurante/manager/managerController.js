@@ -206,6 +206,7 @@ import {
       this[MODEL] = model;
       this[VIEW] = view;
 
+      // lo que haya dentro de onLoad() solo se ejecutara una vez al cargar la pagina
       this.onLoad(); // 3 ejecuto metodo de carga dentro del constructor, luego pintaremos en VISTA
       this.onInit(); // 4 ejecuto metodo inicio
       this[VIEW].bindInit(this.handleInit); // 5 metodo bindInit lo creo en VISTA y ejecuto desde aqui
@@ -228,10 +229,9 @@ import {
       // a) creo 3 categorias
       /*p1 = Manager.getInstance().createCategory('entrante', 'Categoria que hace referencia a pequeños platos previos al primerPlato');
        asi lo hacia en la practica 4, ahora this[MODEL] contiene Manager.getInstance()*/
-      const categoriaPrimer = this[MODEL].createCategory('primerPlato', 'siempre tendra ensalada, pasta o arroz');
-      const categoriaSegundo = this[MODEL].createCategory('segundoPlato', 'siempre tendra un pescado y una carne');
-      const categoriaPostre = this[MODEL].createCategory('postre', 'siempre habra un postre casero');
-
+      const categoriaPrimer = this[MODEL].createCategory('primerPlato', 'siempre tendra ensalada, pasta o arroz','themes/assets/images/nepali-momo.png');
+      const categoriaSegundo = this[MODEL].createCategory('segundoPlato', 'siempre tendra un pescado y una carne','themes/assets/images/nepali-momo.png');
+      const categoriaPostre = this[MODEL].createCategory('postre', 'siempre habra un postre casero','themes/assets/images/nepali-momo.png');
       // a) creo platos 
       const plato1 = this[MODEL].createDish('macarrones', 'macarrones con tomates', ['tomate', 'carne picada'], 'https://via.placeholder.com/258x172.jpg?text=macarrones');
       const plato2 = this[MODEL].createDish('sopa pescado', 'de temporada', ['pescaado temporada', 'fideos', 'repollo', 'cebolla', 'apio'], 'https://via.placeholder.com/258x172.jpg?text=sopaPescado');
@@ -282,8 +282,21 @@ import {
     onLoad = () => {
       //carga objetos
       this[LOAD_MANAGER_OBJECTS](); // cargo todos los objetos creados
-      alert("Los objetos han sido cargados al Manager");
-      
+      alert("Los objetos han sido cargados al Manager, dentro de onLOAD");
+      //this[VIEW].showProductTypes(); // cargo metodo VISTA con las categorias
+
+      //prueba menu cabecera
+      //this[VIEW].showMenuCabecera();
+
+
+      //para generar menu de categorias en la cabecera una unica vez
+      //this.onAddCategory();
+
+      //prueba mostrar categorias
+      //this[VIEW].showCategories(this[MODEL].categories);
+
+      this[VIEW].showCategoriesEnParteCentral(this[MODEL].categories);
+
     };
 
     //4 +++++++++++++++++++++++++++++ INIT Y MANEJADOR PARA EL INIT
@@ -291,10 +304,13 @@ import {
     //carga de inicio debera ser invocado desde constructor
     onInit = () => {
 
-      alert("iniciamos el Manager");
+      alert("iniciamos el Manager dentro de onInit");
 
+      //pintara todas las categorias que tenemos en el array cargado
+      //this[VIEW].showCategories(this[MODEL].categories);
       
-      this[VIEW].showCategories(this[MODEL].categories);
+      
+
       this[VIEW].bindProductsCategoryList(
         this.handleProductsCategoryList,
         
@@ -307,8 +323,17 @@ import {
       this.onInit();
     };
 
-    // una vez creado estos dos metodos vamos a la VISTA para crear su correspondiente BIND
+    // una vez creado estos los metodos init y handlervamos a la VISTA para crear su correspondiente BIND
     //+++++++++++++++++++++++++++ */
+
+    //este metodo se hace para mostrar el menu con las distntas categorias que tenemos
+    //invocamos desde onLoad
+    onAddCategory = () => {
+      this[VIEW].showCategoriesInMenu(this[MODEL].categories);
+      this[VIEW].bindProductsCategoryListInMenu(
+        this.handleProductsCategoryList,
+      );
+    };
 
 
 
