@@ -448,11 +448,13 @@ class ManagerView {
   //una vez creado lo invocamos desde el constructor del CONTROLLER
 
   bindInit(handler) {
+    //click en INICIO
     document.getElementById('init').addEventListener('click', (event) => {
-      this[EXCECUTE_HANDLER](handler, [], 'body', { action: 'init' }, '#', event);
+      handler(); //ejecuto handler cuando haga click sobre elemento init,( boton INICIO) this.handleInit llegara desde el CONTROLLER y ejecutara el metodo oonInit()
     });
+    //click en logo MiRestaurante
     document.getElementById('logo').addEventListener('click', (event) => {
-      this[EXCECUTE_HANDLER](handler, [], 'body', { action: 'init' }, '#', event);
+      handler();
     });
   }
 
@@ -551,38 +553,6 @@ class ManagerView {
       </div>`);
   }
 
-
-  //prueba MENU CABECERA con categorias
-  showMenuCabecera() {
-    //añado menu categorias
-    this.menuCat.insertAdjacentHTML('beforeend',
-      `<li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categorias<b class="caret"></b></a>
-      <ul class="dropdown-menu">
-
-        <!-- Aqui cargaremos como enlaces todos los restaurantes que tengos disponibles en el MODELO-->
-      
-
-        <li><a href="#">DRINKS</a></li>
-        <li><a href="#">STARTERS</a></li>
-        <li><a href="#">TANDOORI - CLAY OVEN - DISHES</a></li>
-        <li class="divider"></li>
-        <li class="dropdown-header">SEAFOOD MAIN COURSES</li>
-        <li><a href="#">CHICKEN MAIN COURSES</a></li>
-        <li><a href="#">LAMB MAIN COURSES</a></li>
-        <li><a href="#">RICE/BREDS</a></li>
-        <li><a href="#">ACCOMPANIMENTS</a></li>
-      </ul>
-    </li>`);
-
-  }
-
-
-
-
-
-
-
   /*
       // usa atributos personalizados como data-type="Camera", son atributos que crea programador para esta aplicacion
       // todo lo que empiece por data - es atributo personalizado segun HTML
@@ -630,6 +600,8 @@ class ManagerView {
   
     */
   //metodo que pinta las Categorias recibe un iterador con las categorias
+  //data-bs-category son atributos personalizados, se usan para luego cargar todo lo asociado a esa categoria
+  
   showCategories(categories) {
 
 
@@ -640,7 +612,7 @@ class ManagerView {
     container.id = 'category-list';
     container.classList.add('row');
     for (const category of categories) {
-      container.insertAdjacentHTML('beforeend', `<div class="col-lg-3 col-md-6"><a data-category="${category.name}" href="#product-list">
+      container.insertAdjacentHTML('beforeend', `<div class="col-lg-3 col-md-6"><a data-bs-category="${category.name}" href="#product-list">
         <div class="cat-list-image"><img alt="${category.name}" src="${category.image}" />
         </div>
         <div class="cat-list-text">
@@ -679,7 +651,79 @@ class ManagerView {
     //************************************** */
 
     for (const category of categories) {
-      container.insertAdjacentHTML('beforeend', `<li><a data-category="${category.title}" class="dropdown-item" href="#product-list">${category.title}</a></li>`);
+      container.insertAdjacentHTML('beforeend', `<li><a data-bs-category="${category.name}" class="dropdown-item" href="#product-list">${category.name}</a></li>`);
+    }
+    li.append(container);
+    this.menuCat.append(li);
+  }
+
+
+  //creamos menu con las distintas categorias generando una lista a partir del iterador categories
+  showRestaurantInMenu(restaurantes) {
+
+  
+
+    /* elimino para hacer prueba
+    const li = document.createElement('li');
+    li.classList.add('nav-item');
+    li.classList.add('dropdown');
+    li.insertAdjacentHTML('beforeend', `<a class="nav-link dropdown-toggle" href="#" id="navCats" role="button"
+      data-bs-toggle="dropdown" aria-expanded="false">Categorías</a>`);
+    const container = document.createElement('ul');
+    container.classList.add('dropdown-menu');
+    */
+
+    //****++++++++++++++++++++++++++++PPRUEBA */
+    const li = document.createElement('li');
+    li.classList.add('dropdown');
+    li.insertAdjacentHTML('beforeend', `<a class="dropdown-toggle" href="#"
+			data-toggle="dropdown">Restaurantes <b class="caret"></b></a>`);
+    const container = document.createElement('ul');
+    container.classList.add('dropdown-menu');
+
+    //************************************** */
+
+    for (const restaurante of restaurantes) {
+      container.insertAdjacentHTML('beforeend', `<li><a data-category="${restaurante.name}" class="dropdown-item" href="#product-list">${restaurante.name}</a></li>`);
+    }
+    li.append(container);
+    this.menuCat.append(li);
+  }
+
+   //creamos menu con alergenos
+   showAlergenostInMenu(alergenos) {
+
+    const li = document.createElement('li');
+    li.classList.add('dropdown');
+    li.insertAdjacentHTML('beforeend', `<a class="dropdown-toggle" href="#"
+			data-toggle="dropdown">Alérgenos <b class="caret"></b></a>`);
+    const container = document.createElement('ul');
+    container.classList.add('dropdown-menu');
+
+    //************************************** */
+
+    for (const alergeno of alergenos) {
+      container.insertAdjacentHTML('beforeend', `<li><a data-category="${alergeno.name}" class="dropdown-item" href="#product-list">${alergeno.name}</a></li>`);
+    }
+    li.append(container);
+    this.menuCat.append(li);
+  }
+
+
+  //adjuntamos menus al menu
+  showMenusInMenu(menus) {
+
+    const li = document.createElement('li');
+    li.classList.add('dropdown');
+    li.insertAdjacentHTML('beforeend', `<a class="dropdown-toggle" href="#"
+			data-toggle="dropdown">Menús <b class="caret"></b></a>`);
+    const container = document.createElement('ul');
+    container.classList.add('dropdown-menu');
+
+    //************************************** */
+
+    for (const menu of menus) {
+      container.insertAdjacentHTML('beforeend', `<li><a data-category="${menu.name}" class="dropdown-item" href="#product-list">${menu.name}</a></li>`);
     }
     li.append(container);
     this.menuCat.append(li);
@@ -734,6 +778,79 @@ class ManagerView {
   }
 
 
+
+  listProducts(products, name) {
+    this.main.replaceChildren();
+    if (this.categories.children.length > 1) this.categories.children[1].remove();
+    const container = document.createElement('div');
+    container.id = 'product-list';
+    container.classList.add('container');
+    container.classList.add('my-3');
+    container.insertAdjacentHTML('beforeend', '<div class="row"> </div>');
+
+    for (const product of products) {
+      const div = document.createElement('div');
+      div.classList.add('col-md-4');
+      div.insertAdjacentHTML('beforeend', `<figure class="card card-product-grid card-lg"> <a data-serial="${product.serial}" href="#single-product" class="img-wrap"><img class="${product.constructor.name}-style" src="${product.url}"></a>
+          <figcaption class="info-wrap">
+            <div class="row">
+              <div class="col-md-8"> <a data-serial="${product.serial}" href="#single-product" class="title">${product.brand} - ${product.model}</a> </div>
+              <div class="col-md-4">
+                <div class="rating text-right"> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> </div>
+              </div>
+            </div>
+          </figcaption>
+          <div class="bottom-wrap">
+            <a href="#" data-serial="${product.serial}" class="btn btn-primary float-end"> Comprar </a>
+            <div><span class="price h5">${product.price.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</span> <br> <small class="text-success">Free shipping</small></div>
+          </div>
+        </figure>`);
+      container.children[0].append(div);
+    }
+    container.insertAdjacentHTML('afterbegin', `<h1>${title}</h1>`);
+    this.main.append(container);
+  }
+
+  //+++++++++++++++++++++++ metodos bind para generar los productos (platos) asociados a cada categoria 
+
+  //productos de  categoria en zona central
+  bindProductsCategoryList(handler) {
+    const categoryList = document.getElementById('category-list');
+    const links = categoryList.querySelectorAll('a');
+    for (const link of links) {
+      link.addEventListener('click', (event) => {
+        const { category } = event.currentTarget.dataset;
+        this[EXCECUTE_HANDLER](
+          handler,
+          [category],
+          '#product-list',
+          { action: 'productsCategoryList', category },
+          '#category-list',
+          event,
+        );
+      });
+    }
+  }
+
+  //productos categoria para menu cabecera
+  bindProductsCategoryListInMenu(handler) {
+    const navCats = document.getElementById('navCats');
+    const links = navCats.nextSibling.querySelectorAll('a');
+    for (const link of links) {
+      link.addEventListener('click', (event) => {
+        const { category } = event.currentTarget.dataset;
+        this[EXCECUTE_HANDLER](
+          handler,
+          [category],
+          '#product-list',
+          { action: 'productsCategoryList', category },
+          '#category-list',
+          event,
+        );
+      });
+    }
+  }
+  //++++++++++++++++++++++++++++++++++++++++
 
 
 }

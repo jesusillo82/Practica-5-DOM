@@ -478,7 +478,7 @@ const Manager = (function () {
 
         //----------------------------------- ALERGENOS --------------------------------------------
 
-        addAllerge(...alergenos) { //...alergenos ----> permite recoger varios argumentos, una o 1000 categorias almacenandolos en el array
+        addAllerge(...alergenos) { //...alergenos ----> permite recoger varios argumentos, una o 1000 alergenos almacenandolos en el array
 
             // validacion si existen argumentos de entrada 
             if (arguments.length === 0) {
@@ -1247,14 +1247,14 @@ const Manager = (function () {
         }
 
 
-        //crea categoria o devuelve
-        createCategory(name, description) {
+        //crea categoria o devuelve, añado url para mostrar imagen
+        createCategory(name, description, url) {
             //busca categoria en array 
             let categori = this.#categories.find(category => category.name === name);;
 
             // si no existe lo crea
             if (!categori) {
-                categori = new Category(name, description);
+                categori = new Category(name, description, url);
                 //this.#categories.push(categori); // lo añade al array categorias
 
             }

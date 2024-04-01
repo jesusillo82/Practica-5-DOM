@@ -209,7 +209,7 @@ import {
       // lo que haya dentro de onLoad() solo se ejecutara una vez al cargar la pagina
       this.onLoad(); // 3 ejecuto metodo de carga dentro del constructor, luego pintaremos en VISTA
       this.onInit(); // 4 ejecuto metodo inicio
-      this[VIEW].bindInit(this.handleInit); // 5 metodo bindInit lo creo en VISTA y ejecuto desde aqui
+      this[VIEW].bindInit(this.handleInit); // 5 metodo bindInit lo creo en VISTA y ejecuto desde aqui, pasandole el manejador para conseguir modelo vista controlador
 
       //comprobacion funcionamiento
       
@@ -258,10 +258,20 @@ import {
       const alergeno2 = this[MODEL].createAllergen('crustaceo', ' Cangrejos, langostas, gambas, langostinos, carabineros, cigalas, etc');
       const alergeno3 = this[MODEL].createAllergen('pescado', ' ademas del pescado la Gelatina de pescado utilizada como soporte de vitaminas o preparados de carotenoides.');
       const alergeno4 = this[MODEL].createAllergen('cacahuete', ' se encuentra además en semillas, pasta y aceites, se puede encontrar en galletas, chocolates, postres, salsas, etc. ');
+      //añado alergenos al array
+      this[MODEL].addAllerge(alergeno1,alergeno2,alergeno3,alergeno4);
+      
+      
+      
+      
       // c) creo 3 menús. 
       const menu1 = this[MODEL].createMenu('semana Santa', ' constara de primer plato, segundo plato, postre, pan y una bebida,con opción de vigilia, precio 35 euros,');
       const menu2 = this[MODEL].createMenu('diario', ' constara de primer plato, segundo plato, postre, pan y una bebida, precio 15 euros');
       const menu3 = this[MODEL].createMenu('navidad', ' constara de dos entrantes, primer plato, segundo plato, postre, pan y dos consumiciones y una copa, precio 50 euros');
+      
+      //añado menus al array
+      this[MODEL].addMenu(menu1,menu2,menu3);
+
       // c) añado 3 platos a cada menu
       this[MODEL].assignDishToMenu(menu1,plato1,plato3,plato5);
       this[MODEL].assignDishToMenu(menu2,plato6,plato2,plato4);
@@ -272,6 +282,8 @@ import {
       const restaurante2 = this[MODEL].createRestaurant('Casa Lucia', ' con capacidad para 70 comensales', this[MODEL].createCoordinate(20, 60));
       const restaurante3 = this[MODEL].createRestaurant('El Patio', ' con capacidad para 80 comensales', this[MODEL].createCoordinate(30, 30));
       
+      //añado los restaurantes al array para generar el menu
+      this[MODEL].addRestaurant(restaurante1,restaurante2,restaurante3) ;
     }
 
     // 3 añado evento de carga
@@ -282,11 +294,23 @@ import {
     onLoad = () => {
       //carga objetos
       this[LOAD_MANAGER_OBJECTS](); // cargo todos los objetos creados
+      
       alert("Los objetos han sido cargados al Manager, dentro de onLOAD");
       //this[VIEW].showProductTypes(); // cargo metodo VISTA con las categorias
 
-      //prueba menu cabecera
-      //this[VIEW].showMenuCabecera();
+      //añade categorias al menu
+      //this[VIEW].showCategoriesInMenu(this[MODEL].categories);
+
+      //menu de categorias
+      this.onAddCategory();
+      //añade restaurantes al menu
+      this[VIEW].showRestaurantInMenu(this[MODEL].restaurantes);
+
+      //añade alergenos al menu
+      this[VIEW].showAlergenostInMenu(this[MODEL].alergenos);
+
+      //añade los menus del restaurante al menu
+      this[VIEW].showMenusInMenu(this[MODEL].menus);
 
 
       //para generar menu de categorias en la cabecera una unica vez
@@ -311,11 +335,11 @@ import {
       
       
 
-      this[VIEW].bindProductsCategoryList(
-        this.handleProductsCategoryList,
+      //this[VIEW].bindProductsCategoryList(
+        //this.handleProductsCategoryList,
         
 
-      );
+     // );
       
     };
 
@@ -326,13 +350,17 @@ import {
     // una vez creado estos los metodos init y handlervamos a la VISTA para crear su correspondiente BIND
     //+++++++++++++++++++++++++++ */
 
-    //este metodo se hace para mostrar el menu con las distntas categorias que tenemos
-    //invocamos desde onLoad
+    //este metodo es un evento,se hace para mostrar el menu con las distntas categorias que tenemos
+    //cuando añadamos una neva categoria en practicas posteiores actualizaremos el menu. Lo invocamos desde onLoad
     onAddCategory = () => {
-      this[VIEW].showCategoriesInMenu(this[MODEL].categories);
-      this[VIEW].bindProductsCategoryListInMenu(
-        this.handleProductsCategoryList,
-      );
+      this[VIEW].showCategoriesInMenu(this[MODEL].categories); //pasamos iterador desde el modelo
+    };
+
+    // este manejador lo ejecutare cada vez que haga click en cada una de las categorias para mostrar los platos asociados. De momento no ttiene funcionalidad
+    //por lo que necesito crear un BIND
+    handleProductsCategoryList = (name) => {
+      const category = this[MODEL].getCategory(name);
+      this[VIEW].listProducts(this[MODEL].getCategoryProducts(category), category.name);
     };
 
 
