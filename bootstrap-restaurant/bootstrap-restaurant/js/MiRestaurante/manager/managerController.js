@@ -330,16 +330,21 @@ import {
 
       alert("iniciamos el Manager dentro de onInit");
 
+      //muestro las categorias en la parte central
+      this[VIEW].showCategoriesEnParteCentral(this[MODEL].categories);
+
+      //asignamos funcionalidad para que al clickear nos muestren los platos asociados a las mismas por lo
+      //que necesito invocar a los bind pasandole el manejador de evento
+      this[VIEW].bindProductsCategoryList(this.handleProductsCategoryList,);
+
+
+
       //pintara todas las categorias que tenemos en el array cargado
       //this[VIEW].showCategories(this[MODEL].categories);
       
       
 
-      //this[VIEW].bindProductsCategoryList(
-        //this.handleProductsCategoryList,
-        
-
-     // );
+      
       
     };
 
@@ -354,13 +359,21 @@ import {
     //cuando añadamos una neva categoria en practicas posteiores actualizaremos el menu. Lo invocamos desde onLoad
     onAddCategory = () => {
       this[VIEW].showCategoriesInMenu(this[MODEL].categories); //pasamos iterador desde el modelo
+      //this[VIEW].bindProductsCategoryList(this.handleProductsCategoryList,);
+   
     };
 
-    // este manejador lo ejecutare cada vez que haga click en cada una de las categorias para mostrar los platos asociados. De momento no ttiene funcionalidad
+    // este manejador lo ejecutare cada vez que haga click en cada una de las categorias para mostrar los platos asociados y sea desde 
+    //la parte central o desde el menu De momento no ttiene funcionalidad
     //por lo que necesito crear un BIND
-    handleProductsCategoryList = (name) => {
-      const category = this[MODEL].getCategory(name);
-      this[VIEW].listProducts(this[MODEL].getCategoryProducts(category), category.name);
+    handleProductsCategoryList = (title) => {
+      alert(" ejecuto MANEJADOR EVENTO");
+      const categoria = this[MODEL].createCategory(title,"",""); //recupero objeto caategoria
+      //recupero iterador con los platos asociados a esa categoria desde el MODEL
+      //llamo al metodo listProducts de la VISTA pasando como argumento el iterador y el nombre de la categoria
+     
+      
+      this[VIEW].listProducts(this[MODEL].getDishesInCategory(categoria), categoria.title);
     };
 
 

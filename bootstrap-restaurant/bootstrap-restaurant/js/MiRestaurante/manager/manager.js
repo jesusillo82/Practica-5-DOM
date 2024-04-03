@@ -241,7 +241,13 @@ const Manager = (function () {
             Object.defineProperty(this, 'categories', {
                 enumerable: true,
                 get() {
-                    const array = this.#categories;
+
+                    //añado .values
+                    const array = this.#categories.values();
+
+                    //const array = this.#categories;
+
+
                     return {
                         *[Symbol.iterator]() {
                             for (const arrayCat of array) {
@@ -411,7 +417,12 @@ const Manager = (function () {
         #getCategoryPosition(category) {
             //recorre elemento x de la parte correspondiente a category
             //hay que usar este tipo de funciones en vez de bucles for
+            
+            
             return this.#categories.findIndex((x) => x.category.name === category.name); //funcion callback tipo arrow
+
+            
+
         }
 
 
@@ -1082,9 +1093,14 @@ const Manager = (function () {
             if (arguments.length === 0) {
                 throw new ObjecManagerException('argument', 'category');
             }
+
+            /*
             if (!(category instanceof Category) || (category === null)) {
                 throw new ObjecManagerException('category', 'Category');
             }
+
+
+            */
             //obtenemos posicion de la categoria
             const position = this.#getCategoryPosition(category);
 
@@ -1220,7 +1236,7 @@ const Manager = (function () {
         //crea menu o devuelve
         createMenu(name, description) {
             //busca menu en array 
-            let menu = this.#menus.find(menu => menu.name === name);
+            let menu = this.#menus.find((item) => item.menu.name === name);
 
             // si no existe lo crea
             if (!menu) {
@@ -1235,7 +1251,7 @@ const Manager = (function () {
         //crea alergeno o devuelve
         createAllergen(name, description) {
             //busca allerge en array 
-            let allerge = this.#alergenos.find(allerge => allerge.name === name);
+            let allerge = this.#alergenos.find((item) => item.allerge.name === name);
 
             // si no existe lo crea
             if (!allerge) {
@@ -1249,16 +1265,25 @@ const Manager = (function () {
 
         //crea categoria o devuelve, añado url para mostrar imagen
         createCategory(name, description, url) {
-            //busca categoria en array 
-            let categori = this.#categories.find(category => category.name === name);;
-
+            //busca categoria en array. Hay que recordar que categories guarda el objeto literal junto con los platos
+            let categori = this.#categories.find((item) => item.category.name === name);
+           
+            console.log(categori);
+            
+            
             // si no existe lo crea
             if (!categori) {
                 categori = new Category(name, description, url);
                 //this.#categories.push(categori); // lo añade al array categorias
+                return categori;
 
             }
-            return categori;
+            //extraigo el objeto Category puesto que #categories almacena { category:Category, dishes:Array}
+            const { category} = categori;
+
+            return category;
+
+           
         }
 
 
@@ -1269,7 +1294,7 @@ const Manager = (function () {
         //crea restaurante o devuelve
         createRestaurant(name, description, location) {
             //busca restaurante en array 
-            let restaurant = this.#restaurantes.find(restaurante => restaurante.name === name);
+            let restaurant = this.#restaurantes.find((item) => item.restaurante.name === name);
 
             // si no existe lo crea
             if (!restaurant) {

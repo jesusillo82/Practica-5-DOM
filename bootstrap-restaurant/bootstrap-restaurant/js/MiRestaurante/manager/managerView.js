@@ -612,7 +612,7 @@ class ManagerView {
     container.id = 'category-list';
     container.classList.add('row');
     for (const category of categories) {
-      container.insertAdjacentHTML('beforeend', `<div class="col-lg-3 col-md-6"><a data-bs-category="${category.name}" href="#product-list">
+      container.insertAdjacentHTML('beforeend', `<div class="col-lg-3 col-md-6"><a data-category="${category.name}" href="#product-list">
         <div class="cat-list-image"><img alt="${category.name}" src="${category.image}" />
         </div>
         <div class="cat-list-text">
@@ -625,7 +625,9 @@ class ManagerView {
     this.zonaCentral.append(container);
   }
 
-  //creamos menu con las distintas categorias generando una lista a partir del iterador categories
+  /*creamos menu con las distintas categorias generando una lista a partir del iterador categories
+  usamos atributo personalizado con el nombre de la categoria que hara referencia al enlace #product-list
+  <a data-bs-category="${category.name}" class="dropdown-item" href="#product-list">${category.name}</a> */
   showCategoriesInMenu(categories) {
 
   
@@ -752,6 +754,7 @@ class ManagerView {
     
     //parte div general
     const container = document.createElement('div');
+    container.id = 'category-list';
     container.classList.add('container');
     const hijo = document.createElement('div');
     container.appendChild(hijo);
@@ -764,7 +767,7 @@ class ManagerView {
       hijo.insertAdjacentHTML('beforeend', 
       `<div class="col-lg-4">
         <div class="media">
-          <a href="menu/">
+          <a data-category="${category.name}" href="#product-list">
             <img src="${category.url}" alt="${category.name}" />
           </a>
           <h3 class="media-heading text-danger-theme">${category.name}</h3>
@@ -778,10 +781,10 @@ class ManagerView {
   }
 
 
-
+  // metodo que dado un nombre de una categoria muestra todos los platos asociados a la misma (products es un iterador)
   listProducts(products, name) {
-    this.main.replaceChildren();
-    if (this.categories.children.length > 1) this.categories.children[1].remove();
+    //this.main.replaceChildren();
+    if (this.zonaCentral.children.length > 1) this.zonaCentral.children[1].remove();
     const container = document.createElement('div');
     container.id = 'product-list';
     container.classList.add('container');
@@ -791,24 +794,23 @@ class ManagerView {
     for (const product of products) {
       const div = document.createElement('div');
       div.classList.add('col-md-4');
-      div.insertAdjacentHTML('beforeend', `<figure class="card card-product-grid card-lg"> <a data-serial="${product.serial}" href="#single-product" class="img-wrap"><img class="${product.constructor.name}-style" src="${product.url}"></a>
+      div.insertAdjacentHTML('beforeend', `<figure class="card card-product-grid card-lg"> <a data-serial="${product.name}" href="#single-product" class="img-wrap"><img class="${product.name}-style" src="${product.image}"></a>
           <figcaption class="info-wrap">
             <div class="row">
-              <div class="col-md-8"> <a data-serial="${product.serial}" href="#single-product" class="title">${product.brand} - ${product.model}</a> </div>
+              <div class="col-md-8"> <a data-serial="${product.name}" href="#single-product" class="title">${product.name}</a> </div>
               <div class="col-md-4">
                 <div class="rating text-right"> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> </div>
               </div>
             </div>
           </figcaption>
           <div class="bottom-wrap">
-            <a href="#" data-serial="${product.serial}" class="btn btn-primary float-end"> Comprar </a>
-            <div><span class="price h5">${product.price.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</span> <br> <small class="text-success">Free shipping</small></div>
-          </div>
+            <a href="#" data-serial="${product.name}" class="btn btn-primary float-end"> Comprar </a>
+            </div>
         </figure>`);
       container.children[0].append(div);
     }
-    container.insertAdjacentHTML('afterbegin', `<h1>${title}</h1>`);
-    this.main.append(container);
+    container.insertAdjacentHTML('afterbegin', `<h1>${name}</h1>`);
+    this.zonaCentral.append(container);
   }
 
   //+++++++++++++++++++++++ metodos bind para generar los productos (platos) asociados a cada categoria 
@@ -817,17 +819,11 @@ class ManagerView {
   bindProductsCategoryList(handler) {
     const categoryList = document.getElementById('category-list');
     const links = categoryList.querySelectorAll('a');
+    
+    //para cada enlace a asigno escucha pasando al handler el atributo data-category para saber que tiene que mostrar
     for (const link of links) {
       link.addEventListener('click', (event) => {
-        const { category } = event.currentTarget.dataset;
-        this[EXCECUTE_HANDLER](
-          handler,
-          [category],
-          '#product-list',
-          { action: 'productsCategoryList', category },
-          '#category-list',
-          event,
-        );
+        handler(event.currentTarget.dataset.category);
       });
     }
   }
@@ -838,15 +834,7 @@ class ManagerView {
     const links = navCats.nextSibling.querySelectorAll('a');
     for (const link of links) {
       link.addEventListener('click', (event) => {
-        const { category } = event.currentTarget.dataset;
-        this[EXCECUTE_HANDLER](
-          handler,
-          [category],
-          '#product-list',
-          { action: 'productsCategoryList', category },
-          '#category-list',
-          event,
-        );
+        handler(event.currentTarget.dataset.category);
       });
     }
   }
