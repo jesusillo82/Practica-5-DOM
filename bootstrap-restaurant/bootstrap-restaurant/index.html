@@ -68,6 +68,9 @@
 ================================================== -->
 
 <body>
+
+  
+
   <!--menu navegacion superior-->
   <div class="navbar-wrapper">
     <div class="container">
@@ -115,6 +118,20 @@
     </div>
   </div>
 
+  <!-- navegacion con migas de pan-->
+  <div>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Sección</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Sección actual</li>
+      </ol>
+    </nav>
+
+  </div>
+  
+  
+
 
 
 
@@ -129,13 +146,16 @@
 
   
 
-  <!-- carrusel que se desplaza solo sin darle nosotros a ninguna flecha-->
+  <!-- carrusel con los 3 platos mostrados de forma aleatoria-->
+
   <div class="container marketing">
     <div id="myCarousel4" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
+      <!--
       <div class="carousel-inner">
         <div class="item active">
           <div class="row featurette">
+
             <div class="col-md-7">
               <h2 class="featurette-heading">Fish and Chips <span class="text-muted">It's very very testy</span></h2>
               <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis
@@ -145,6 +165,7 @@
             <div class="col-md-5">
               <img src="themes/assets/images/fish-and-chips.png" alt="Fish and Chips">
             </div>
+
           </div>
         </div>
 
@@ -178,6 +199,7 @@
           </div>
         </div>
       </div>
+    -->
     </div><!-- /.carousel -->
   </div><!-- /.container -->
 
@@ -198,17 +220,26 @@
     
   </div>
 
+
+  <!-- Introduccion a la seccion-->
+
   <!-- div tras los 3 platos en zona central con informacion de la seccion siguiente-->
   <div class="introSection">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <h1 class="cntr">We are launching complete online food order system for restaurent and takeaway Only at the
-            rate <br>&pound;999 </h1>
+          <h1 class="cntr">Bienvenidos a la página Web de nuestra cadena de restaurantes</h1>
         </div>
       </div>
     </div>
   </div>
+
+
+  <!-- zona para mostrar interior de los arrays-->
+  <div id="mostrarContenidoArrays"   class="container marketing">
+    
+  </div>
+
 
 
 
@@ -217,10 +248,16 @@
 
   <!-- div de tipo carrusel desplazando platos de izquierda a derecha-->
 
-  <div class="container marketing">
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+              BREAKFAST
+  -->
+
+  <div id="mostrarCarrusel"  class="container marketing">
 
     <!-- carrusel de categoria DESAYUNO-->
     <h2 class="itemsTitle">Breakfast</h2><!-- esta clase cambia a mayuscula por ser titulo-->
+   
+   
     <div id="myCarousel1" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
       
@@ -328,11 +365,7 @@
       <div class="carousel-inner">
         <div class="item active">
           <div class="row">
-            <div class="col-lg-4">
-              <img src="themes/assets/images/salate.png" alt="Generic placeholder image">
-              <h4>Salates</h4>
-              <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>
-            </div><!-- /.col-lg-4 -->
+            
             <div class="col-lg-4">
               <img src="themes/assets/images/chicken.png" alt="Generic placeholder image">
               <h4>Meal</h4>
@@ -477,6 +510,13 @@
     </div><!-- /.carousel -->
   </div>
 
+
+
+
+
+
+
+
 <!-- penultima seccion que muestra 3 platos especiales con su descripcion
 y acceso al menu principal-->
   <div id="parteFijaGris"    class="highlightSection">
@@ -534,64 +574,17 @@ y acceso al menu principal-->
 
 
   <!-- carrusel que se desplaza solo sin darle nosotros a ninguna flecha-->
-  <div class="container marketing">
-    <div id="myCarousel4" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <div class="carousel-inner">
-        <div class="item active">
-          <div class="row featurette">
-            <div class="col-md-7">
-              <h2 class="featurette-heading">Fish and Chips <span class="text-muted">It's very very testy</span></h2>
-              <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis
-                euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus
-                ac cursus commodo.</p>
-            </div>
-            <div class="col-md-5">
-              <img src="themes/assets/images/fish-and-chips.png" alt="Fish and Chips">
-            </div>
-          </div>
-        </div>
+  <div id="aleatorio"  class="container marketing">
 
-
-        <div class="item">
-          <div class="row featurette">
-            <div class="col-md-5">
-              <img src="themes/assets/images/burger.png" alt="Generic placeholder image">
-            </div>
-            <div class="col-md-7">
-              <h2 class="featurette-heading">Oh yeah, very nice Burger. <span class="text-muted">Delicious.</span></h2>
-              <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis
-                euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus
-                ac cursus commodo.</p>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="item">
-          <div class="row featurette">
-            <div class="col-md-7">
-              <h2 class="featurette-heading">Try yourself <span class="text-muted">Testy</span></h2>
-              <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis
-                euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus
-                ac cursus commodo.</p>
-            </div>
-            <div class="col-md-5">
-              <img class="img-circle" src="themes/assets/images/drinks.png" alt="Generic placeholder image">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div><!-- /.carousel -->
-  </div><!-- /.container -->
+    
   <!-- /END THE FEATURETTES -->
 
 
   <!-- FOOTER -->
   <footer>
     <div class="container">
-      <p class="pull-right"><a href="#">Back to top</a></p>
-      <p>&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+      <p class="pull-right"><a href="#">subir arriba</a></p>
+      <p>&copy; 2024 Jesús Bernabé Imedio Perea; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
     </div>
   </footer>
 

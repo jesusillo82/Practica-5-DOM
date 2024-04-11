@@ -229,19 +229,19 @@ import {
       // a) creo 3 categorias
       /*p1 = Manager.getInstance().createCategory('entrante', 'Categoria que hace referencia a pequeños platos previos al primerPlato');
        asi lo hacia en la practica 4, ahora this[MODEL] contiene Manager.getInstance()*/
-      const categoriaPrimer = this[MODEL].createCategory('primerPlato', 'siempre tendra ensalada, pasta o arroz','themes/assets/images/nepali-momo.png');
-      const categoriaSegundo = this[MODEL].createCategory('segundoPlato', 'siempre tendra un pescado y una carne','themes/assets/images/nepali-momo.png');
-      const categoriaPostre = this[MODEL].createCategory('postre', 'siempre habra un postre casero','themes/assets/images/nepali-momo.png');
+      const categoriaPrimer = this[MODEL].createCategory('primerPlato', 'siempre tendra ensalada, pasta o arroz','themes/assets/images/primerPlato.png');
+      const categoriaSegundo = this[MODEL].createCategory('segundoPlato', 'siempre tendra un pescado y una carne','themes/assets/images/segundoPlato.png');
+      const categoriaPostre = this[MODEL].createCategory('postre', 'siempre habra un postre casero','themes/assets/images/postre.png');
       // a) creo platos 
-      const plato1 = this[MODEL].createDish('macarrones', 'macarrones con tomates', ['tomate', 'carne picada'], 'https://via.placeholder.com/258x172.jpg?text=macarrones');
-      const plato2 = this[MODEL].createDish('sopa pescado', 'de temporada', ['pescaado temporada', 'fideos', 'repollo', 'cebolla', 'apio'], 'https://via.placeholder.com/258x172.jpg?text=sopaPescado');
-      const plato3 = this[MODEL].createDish('solomillo', 'a la pimienta', ['solomillo', 'nata', 'cebolla'], 'https://via.placeholder.com/258x172.jpg?text=solomilloPimienta');
-      const plato4 = this[MODEL].createDish('helado a la albahaca', '2 bolas de limon', ['helado limon', 'albahaca', 'azucar'], 'https://via.placeholder.com/258x172.jpg?text=heladoAlbahaca');
-      const plato5 = this[MODEL].createDish('frutaVariada', 'distintas frutas', ['naranja', 'platano'], 'https://via.placeholder.com/258x172.jpg?text=frutaVariada');
-      const plato6 = this[MODEL].createDish('ensalada de pollo', 'ensalada al estilo gallego', ['lechuga', 'tomate', 'pollo'], 'https://via.placeholder.com/258x172.jpg?text=EnsaladaPollo');
-      const plato7 = this[MODEL].createDish('bizcocho de la casa', 'casero', ['bizcocho', 'sirope naranja'], 'https://via.placeholder.com/258x172.jpg?text=bizcocho');
-      const plato8 = this[MODEL].createDish('lubina', 'a la espalda', ['lubina', 'sal', 'limon'], 'https://via.placeholder.com/258x172.jpg?text=lubina');
-      const plato9 = this[MODEL].createDish('entrecot', 'al gusto', ['entrecot', 'sal'], 'https://via.placeholder.com/258x172.jpg?text=entrecot');
+      const plato1 = this[MODEL].createDish('macarrones', 'macarrones con tomates gratinados al horno', ['tomate', 'carne picada', 'queso gratinado'], 'themes/assets/images/macarrones.png');
+      const plato2 = this[MODEL].createDish('sopa pescado', 'con trocitos de pescado de temporada', ['pescaado temporada', 'fideos', 'repollo', 'cebolla', 'apio'], 'themes/assets/images/sopaPescado.png');
+      const plato3 = this[MODEL].createDish('solomillo', 'con nuestro toque a la pimienta', ['solomillo', 'nata', 'cebolla'], 'themes/assets/images/solomillo.png');
+      const plato4 = this[MODEL].createDish('helado a la albahaca', 'con 2 bolas de limon y otra de nata y su insuperable aroma a albahaca natural', ['helado limon', 'albahaca','nata', 'azucar'], 'themes/assets/images/heladoAlbahaca.png');
+      const plato5 = this[MODEL].createDish('frutaVariada', 'distintas frutas variadas de temporada', ['naranja', 'platano'], 'themes/assets/images/frutaVariada.png');
+      const plato6 = this[MODEL].createDish('ensalada de pollo', 'ensalada al estilo castellano, de la huerta y de la granja a nuestra mesa', ['lechuga', 'tomate', 'pollo'], 'themes/assets/images/ensaladaPollo.png');
+      const plato7 = this[MODEL].createDish('bizcocho de la casa', 'casero con los mejores ingredientes naturales', ['bizcocho', 'sirope naranja'], 'themes/assets/images/bizcocho.png');
+      const plato8 = this[MODEL].createDish('lubina', 'a la espalda con salsa de naranja valenciana', ['lubina', 'sal', 'naranja'], 'themes/assets/images/lubina.png');
+      const plato9 = this[MODEL].createDish('entrecot', 'al gusto, carne 100% gallega', ['entrecot', 'sal'], 'themes/assets/images/entrecot.png');
       
       // a) añado 4 platos a cada categoria
 
@@ -295,7 +295,7 @@ import {
       //carga objetos
       this[LOAD_MANAGER_OBJECTS](); // cargo todos los objetos creados
       
-      alert("Los objetos han sido cargados al Manager, dentro de onLOAD");
+      //alert("Los objetos han sido cargados al Manager, dentro de onLOAD");
       //this[VIEW].showProductTypes(); // cargo metodo VISTA con las categorias
 
       //añade categorias al menu
@@ -321,6 +321,11 @@ import {
 
       this[VIEW].showCategoriesEnParteCentral(this[MODEL].categories);
 
+
+      //aleatorio
+      this[VIEW].mostrarPlatosAleatorio(this[MODEL].platosAleatorios(3));
+
+
     };
 
     //4 +++++++++++++++++++++++++++++ INIT Y MANEJADOR PARA EL INIT
@@ -328,7 +333,7 @@ import {
     //carga de inicio debera ser invocado desde constructor
     onInit = () => {
 
-      alert("iniciamos el Manager dentro de onInit");
+      //alert("iniciamos el Manager dentro de onInit");
 
       //muestro las categorias en la parte central
       this[VIEW].showCategoriesEnParteCentral(this[MODEL].categories);
@@ -360,7 +365,6 @@ import {
     onAddCategory = () => {
       this[VIEW].showCategoriesInMenu(this[MODEL].categories); //pasamos iterador desde el modelo
       //this[VIEW].bindProductsCategoryList(this.handleProductsCategoryList,);
-   
     };
 
     // este manejador lo ejecutare cada vez que haga click en cada una de las categorias para mostrar los platos asociados y sea desde 
@@ -372,9 +376,17 @@ import {
       //recupero iterador con los platos asociados a esa categoria desde el MODEL
       //llamo al metodo listProducts de la VISTA pasando como argumento el iterador y el nombre de la categoria
      
-      
-      this[VIEW].listProducts(this[MODEL].getDishesInCategory(categoria), categoria.title);
+      //pintar lista productos por categoria en zonaCentral
+      //this[VIEW].listProducts(this[MODEL].getDishesInCategory(categoria), categoria.title);
+
+      //pintar lista productos por categoria en CARRUSEL
+      this[VIEW].mostrarInteriorArrays(this[MODEL].getDishesInCategory(categoria), categoria.title);
+
     };
+
+
+    // creo metodo que recupere medinate  getter el iterador de platos y lo meta como parametro a otro metodo de la vista que
+    //muestre de forma aleatoria
 
 
 

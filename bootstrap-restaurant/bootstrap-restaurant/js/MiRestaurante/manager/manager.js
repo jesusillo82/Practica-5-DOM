@@ -1312,6 +1312,42 @@ const Manager = (function () {
             return coordinate;
         }
 
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        //metodos añadidos para práctica 5
+
+        //metodo que devuelve un entero entre un minimo y un maximo incluidos ambos
+        numeroEnteroAleatorio(min,max){
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max-min *1) + min);
+        }
+
+        //recibe como argumento el numero de platos a mostrar de forma aleatoria y devuelve array con los mismos
+        platosAleatorios(cantidad) {
+            let arrayAleatorio =[];
+
+            //compruebo que tenga disponibidad de platos
+            if (cantidad <= this.#platos.length) {
+                
+                //genero numeros aleatorios segun cantidad
+                for(let i=0;i<cantidad;i++){
+                    let aleatorio = this.numeroEnteroAleatorio(0,this.#platos.length);
+
+                    //comprobamos que no se repiitan los numeros aleatorios antes de añadirlos al arrayAleatorio
+
+                    arrayAleatorio.push(this.#platos[aleatorio]);
+                } 
+            } else {
+                console.log(" no hay tantos platos disponibles");
+                
+            }
+
+            return arrayAleatorio; //devuelvo array con los platos aleatorios
+        }
+
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
 
     }
 

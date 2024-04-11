@@ -438,6 +438,21 @@ class ManagerView {
     //prueba zona central titulo
     this.zonaCentralTitulo = document.getElementById('zona central titulo');
 
+    //parte carrusel para mostrar el contenido de los arrays
+    this.mostrarCarrusel = document.getElementById('mostrarCarrusel');
+
+    //mostrar interior arrays
+    this.mostrarContenidoArray = document.getElementById('mostrarContenidoArrays');
+
+    
+
+    //mostrar platos aleatorios al final
+    this.aleatorioCarrusel = document.getElementById('myCarousel4');
+
+    
+    
+    
+  
 
     //prueba
     this.parteFijaGris = document.getElementById('parteFijaGris');
@@ -737,7 +752,10 @@ class ManagerView {
   // METIODO PARA MOSTRAR CATEGORIAS EN LA PARTE CENTRAL
   showCategoriesEnParteCentral(categories) {
 
-    if (this.zonaCentralTitulo.children.length > 1) this.zonaCentralTitulo.children[1].remove();
+   // if (this.zonaCentralTitulo.children.length > 1) this.zonaCentralTitulo.children[1].remove();
+   this.zonaCentralTitulo.replaceChildren();
+   this.zonaCentral.replaceChildren();
+   
     
     // parte del titulo
     this.zonaCentralTitulo.insertAdjacentHTML('beforeend',
@@ -781,6 +799,59 @@ class ManagerView {
   }
 
 
+
+
+  //METODO MUESTRA CONTENIDO DE LOS ARRAYS
+    // METIODO PARA MOSTRAR CATEGORIAS EN LA PARTE CENTRAL
+  showCategoriesEnParteCentral(categories) {
+
+      // if (this.zonaCentralTitulo.children.length > 1) this.zonaCentralTitulo.children[1].remove();
+      this.zonaCentralTitulo.replaceChildren();
+      this.zonaCentral.replaceChildren();
+      
+       
+       // parte del titulo
+       this.zonaCentralTitulo.insertAdjacentHTML('beforeend',
+         `
+         <div class="container">
+           <h1>CATEGORIAS</h1>
+           <p>
+             Estan son las categorias disponibles actualmente.
+         </p>
+         </div>
+         `);
+         //borro hijos zonaCentral
+       this.zonaCentral.replaceChildren();
+       
+       //parte div general
+       const container = document.createElement('div');
+       container.id = 'category-list';
+       container.classList.add('container');
+       const hijo = document.createElement('div');
+       container.appendChild(hijo);
+       hijo.classList.add('row');
+   
+   
+       
+   
+       for (const category of categories) {
+         hijo.insertAdjacentHTML('beforeend', 
+         `<div class="col-lg-4">
+           <div class="media">
+             <a data-category="${category.name}" href="#product-list">
+               <img src="${category.url}" alt="${category.name}" />
+             </a>
+             <h3 class="media-heading text-danger-theme">${category.name}</h3>
+             <p>${category.description}</p>
+           </div>
+         </div>
+   
+         `);
+       }
+       this.zonaCentral.append(container);
+  }
+
+
   // metodo que dado un nombre de una categoria muestra todos los platos asociados a la misma (products es un iterador)
   listProducts(products, name) {
     //this.main.replaceChildren();
@@ -789,6 +860,9 @@ class ManagerView {
     container.id = 'product-list';
     container.classList.add('container');
     container.classList.add('my-3');
+
+
+
     container.insertAdjacentHTML('beforeend', '<div class="row"> </div>');
 
     for (const product of products) {
@@ -804,7 +878,7 @@ class ManagerView {
             </div>
           </figcaption>
           <div class="bottom-wrap">
-            <a href="#" data-serial="${product.name}" class="btn btn-primary float-end"> Comprar </a>
+            <a href="#" data-serial="${product.name}" class="btn btn-primary float-end"> Mostrar ficha</a>
             </div>
         </figure>`);
       container.children[0].append(div);
@@ -813,12 +887,426 @@ class ManagerView {
     this.zonaCentral.append(container);
   }
 
+
+  //MOSTRAR INTERIOR ARRAYS
+  mostrarInteriorArrays(products, title) {
+
+
+    // if (this.zonaCentralTitulo.children.length > 1) this.zonaCentralTitulo.children[1].remove();
+    this.zonaCentralTitulo.replaceChildren();
+    this.zonaCentral.replaceChildren();
+    
+     
+     // parte del titulo
+     this.zonaCentralTitulo.insertAdjacentHTML('beforeend',
+       `
+       <div class="container">
+         <h1>Platos disponibles actualmente</h1>
+         <p>
+           Estan son los platos asociados a esta categoria.
+       </p>
+       </div>
+       `);
+       //borro hijos zonaCentral
+     this.zonaCentral.replaceChildren();
+     
+     //parte div general
+     const container = document.createElement('div');
+     container.id = 'product-list';
+     container.classList.add('container');
+     const hijo = document.createElement('div');
+     container.appendChild(hijo);
+     hijo.classList.add('row');
+ 
+ 
+     
+ 
+     for (const product of products) {
+       hijo.insertAdjacentHTML('beforeend', 
+       `<div class="col-lg-4">
+         <div class="media">
+           <a data-serial="${product.name}" href="#product-list">
+             <img src="${product.image}" alt="${product.name}" />
+           </a>
+           <h3 class="media-heading text-danger-theme">${product.name}</h3>
+           <p>${product.description}</p>
+         </div>
+       </div>
+ 
+       `);
+     }
+     this.zonaCentral.append(container);
+
+
+
+
+
+
+
+
+
+
+    //this.main.replaceChildren();
+    /*
+    if (this.mostrarContenidoArray.children.length > 1) this.mostrarContenidoArray.children[1].remove();
+    const container = document.createElement('div');
+    container.id = 'product-list';
+    container.classList.add('container');
+    container.classList.add('my-3');
+
+
+
+    container.insertAdjacentHTML('beforeend', '<div class="row"> </div>');
+
+    for (const product of products) {
+      const div = document.createElement('div');
+      div.classList.add('col-md-4');
+      div.insertAdjacentHTML('beforeend', `<figure class="card card-product-grid card-lg"> <a data-serial="${product.name}" href="#single-product" class="img-wrap"><img class="${product.name}-style" src="${product.image}"></a>
+          <figcaption class="info-wrap">
+            <div class="row">
+              <div class="col-md-8"> <a data-serial="${product.name}" href="#single-product" class="title">${product.name}</a> </div>
+              <div class="col-md-4">
+                <div class="rating text-right"> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> </div>
+              </div>
+            </div>
+          </figcaption>
+          <div class="bottom-wrap">
+            <a href="#" data-serial="${product.name}" class="btn btn-primary float-end"> Mostrar ficha</a>
+            </div>
+        </figure>`);
+      container.children[0].append(div);
+    }
+    container.insertAdjacentHTML('afterbegin', `<h1>${name}</h1>`);
+    this.mostrarContenidoArray.append(container);
+  }
+
+  */
+}
+  
+
+
+  /* ++++++++++++++++++++++++++ mostrar Productos en parte carrusel */
+  // metodo que dado un nombre de una categoria muestra todos los platos asociados a la misma (products es un iterador)
+  
+  listProductsCarrusel(products, name) {
+    //this.main.replaceChildren();
+    if (this.mostrarCarrusel.children.length > 1) this.mostrarCarrusel.children[1].remove();
+    
+    //padre
+    const container = document.createElement('div');
+    container.id='myCarousel1';
+    container.classList.add('carousel-slide');
+    container.setAttribute("data-ride", "carousel");
+    //hijo1
+    const hijoContainer1 = document.createElement('div');
+    hijoContainer1.classList.add('carousel-inner');
+    //añado hijo
+    container.appendChild(hijoContainer1);
+
+    //inserto controlador carrusel
+    container.insertAdjacentHTML('beforeend', `<a class="left carousel-control" href="#myCarousel1" data-slide="prev"><span
+    class="glyphicon glyphicon-chevron-left"></span></a><a class="right carousel-control" href="#myCarousel1" data-slide="next"><span
+    class="glyphicon glyphicon-chevron-right"></span></a>
+      `);
+
+  
+    // ESTRUCTURA PARA ITEM ACTIVO
+    //creo nieto
+    const nietoContainer = document.createElement('div');
+    nietoContainer.classList.add('item-active');
+    //creo nieto2
+    const nietoContainer2 = document.createElement('div');
+    nietoContainer2.classList.add('item');
+    //creo nieto3
+    const nietoContainer3 = document.createElement('div');
+    nietoContainer3.classList.add('item');
+    
+
+
+    //creo hijo del nieto
+    const hijoNieto = document.createElement('div');
+    hijoNieto.classList.add('row');
+
+    //creo hijo nieto2
+    const hijoNieto2 = document.createElement('div');
+    hijoNieto2.classList.add('row');
+
+    //creo hijo nieto 3
+    const hijoNieto3 = document.createElement('div');
+    hijoNieto3.classList.add('row');
+
+    //añado nieto 1
+    nietoContainer.appendChild(hijoNieto);
+    //añado nieto 2
+    nietoContainer2.appendChild(hijoNieto2);
+    //añado nieto 3
+    nietoContainer3.appendChild(hijoNieto3);
+
+   //añado a la estructura nieto
+    //nietoContainer.insertAdjacentHTML('beforeend', '<div class="row"> </div>');
+
+    alert(" generando estructurra html 1");
+
+    /*IMPORTANTE si se crea sólo un elemento con createElement y 
+    se inserta en varias posiciones, no se copia, sino que se mueve de posición, esto implica que
+    al ejecutar appendChild(div) no apareceran 9 inserciones sino solo 3 las demas se copian
+    solucion: https://developer.mozilla.org/es/docs/Web/API/Node/appendChild
+    */
+    
+    for (const product of products) {
+      let div = document.createElement('div');
+
+      //clono para solucionar el problema
+      let div1 = div.cloneNode(false);
+      let div2 = div.cloneNode(false);
+
+      //para div
+      div.classList.add('col-md-4');
+      div.insertAdjacentHTML('beforeend', `<img src="${product.image}" alt="Generic placeholder image">
+      <h4>${product.name}</h4>
+      <!-- boton con enlace para añadir al carrito-->
+      <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>`);
+      
+      //par div1
+      div1.classList.add('col-md-4');
+      div1.insertAdjacentHTML('beforeend', `<img src="${product.image}" alt="Generic placeholder image">
+      <h4>${product.name}</h4>
+      <!-- boton con enlace para añadir al carrito-->
+      <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>`);
+      
+      //para div2
+      div2.classList.add('col-md-4');
+      div2.insertAdjacentHTML('beforeend', `<img src="${product.image}" alt="Generic placeholder image">
+      <h4>${product.name}</h4>
+      <!-- boton con enlace para añadir al carrito-->
+      <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>`);
+
+
+      //container.children[0].append(div);
+      hijoNieto.appendChild(div);
+      hijoNieto2.appendChild(div1);
+      hijoNieto3.appendChild(div2);
+
+      
+
+
+
+    }
+    //container.insertAdjacentHTML('afterbegin', `<h1>${products.name}</h1>`);
+    //this.mostrarCarrusel.append(container);
+
+    /*
+    // ESTRUCTURA PARA ITEM 
+    const hijoItem = document.createElement('div');
+    hijoItem.classList.add('item-active');
+    //añado hijo a hijoItem
+    const nietoItem = document.createElement('div');
+    nietoItem.classList.add('row');
+
+    //añado nietoItem
+    hijoItem.appendChild(nietoItem);
+
+    //añado a la estructura
+    //hijoContainer1.appendChild(nietoItem);
+    */
+    //hijoContainer1.appendChild(nietoItem);
+    //añado a la estructura nieto
+    //nietoContainer2.insertAdjacentHTML('beforeend', '<div class="row"> </div>');
+
+   
+   
+
+
+
+
+    //añado nieto
+    hijoContainer1.appendChild(nietoContainer);
+    //añado nieto2
+    hijoContainer1.appendChild(nietoContainer2);
+
+    //añado nieto3
+    hijoContainer1.appendChild(nietoContainer3);
+
+
+     
+
+
+
+
+    //añado a la estructura
+    //hijoContainer1.appendChild(nietoItem);
+
+    container.insertAdjacentHTML('afterbegin', `<h1>${products.name}</h1>`);
+    this.mostrarCarrusel.append(container);
+
+
+
+  }
+
+
+  //metodo que muestra 3 platos de forma aleatoria
+  mostrarPlatosAleatorio(platos) {
+
+    //parte tras menu de navegacion
+
+    //insertar elementos en el carrusel
+
+    //generar 3 platos de forma aleatoria
+
+    //this.main.replaceChildren();
+    if (this.aleatorioCarrusel.children.length > 1) this.aleatorioCarrusel.children[1].remove();
+    
+    //padre
+    /*
+    const container = document.createElement('div');
+    container.id='myCarousel4';
+    container.classList.add('carousel-slide');
+    container.setAttribute("data-ride", "carousel");
+    //hijo1
+    const hijoContainer1 = document.createElement('div');
+    hijoContainer1.classList.add('carousel-inner');
+    //añado hijo
+    container.appendChild(hijoContainer1);
+
+    
+    // ESTRUCTURA PARA ITEM ACTIVO
+    //creo nieto
+    const nietoContainer0 = document.createElement('div');
+    nietoContainer0.classList.add('item-active');
+    //creo nieto2
+    const nietoContainer1 = document.createElement('div');
+    nietoContainer1.classList.add('item');
+    //creo nieto3
+    const nietoContainer2 = document.createElement('div');
+    nietoContainer2.classList.add('item');
+    
+
+
+    
+
+   //añado a la estructura nieto
+    //nietoContainer.insertAdjacentHTML('beforeend', '<div class="row"> </div>');
+    */
+    alert(" generando platos aleatorios");
+    this.aleatorioCarrusel.insertAdjacentHTML('beforeend', `
+    <div class="carousel-inner">
+    <div class="item active">
+      <div class="row featurette">
+
+        <div class="col-md-7">
+          <h2 class="featurette-heading">${platos[0].name} <span class="text-muted">Espectacular.</span></h2>
+          <p class="lead">${platos[0].description}.</p>
+        </div>
+        <div class="col-md-5">
+          <img src=${platos[0].image} alt=${platos[0].name}>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="item">
+      <div class="row featurette">
+        <div class="col-md-5">
+          <img src=${platos[1].image} alt=${platos[1].name}>
+        </div>
+        <div class="col-md-7">
+          <h2 class="featurette-heading">${platos[1].name}<span class="text-muted">Delicioso.</span></h2>
+          <p class="lead">${platos[1].description}</p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="item">
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">${platos[2].name}<span class="text-muted">Increible.</span></h2>
+          <p class="lead">${platos[2].description}</p>
+        </div>
+        <div class="col-md-5">
+          <img class="img-circle" src=${platos[2].image} alt=>
+        </div>
+      </div>
+    </div>
+  </div>`);
+
+    /*IMPORTANTE si se crea sólo un elemento con createElement y 
+    se inserta en varias posiciones, no se copia, sino que se mueve de posición, esto implica que
+    al ejecutar appendChild(div) no apareceran 9 inserciones sino solo 3 las demas se copian
+    solucion: https://developer.mozilla.org/es/docs/Web/API/Node/appendChild
+    */
+    
+    //PUEDO DEVOLVER PRIMERO 3 PLATOS DE FORMA ALEATORIA DESDE ARRAY PLATOS
+    // Y GUARDARLOS EN UN ARRAY PARA DESPUES RECORRER LOS 3 PLATOS
+
+
+
+    /*
+    //ejecuto 3 veces
+    for (let i=0;i<platos.length;i++) {
+      let div = document.createElement('div');
+      //para div
+      div.classList.add('row-featurette');
+      div.insertAdjacentHTML('beforeend', `
+      <div class="col-md-7">
+              <h2 class="featurette-heading">${platos[i].name}<span class="text-muted">It's very very testy</span></h2>
+              <p class="lead">${platos[i].description}.</p>
+            </div>
+            <div class="col-md-5">
+              <img src="${platos[i].image}" alt="Generic placeholder image">
+            </div>`);
+    
+      //añado a cada nieto i
+      nietoContainer+i.appendChild(div);
+    }
+    
+
+
+
+    //añado nieto
+    hijoContainer1.appendChild(nietoContainer0);
+    //añado nieto2
+    hijoContainer1.appendChild(nietoContainer1);
+
+    //añado nieto3
+    hijoContainer1.appendChild(nietoContainer2);
+
+
+     
+
+
+
+
+    //añado a la estructura
+    //hijoContainer1.appendChild(nietoItem);
+
+    this.mostrar3platos.append(container);
+
+    */
+
+
+
+
+
+    
+   }
+  
+
+
+  
   //+++++++++++++++++++++++ metodos bind para generar los productos (platos) asociados a cada categoria 
 
-  //productos de  categoria en zona central
+  //una vez pintado el HTML con showCategoriesEnParteCentral(categories) recojo cada uno de los enlaces y les asigno un
+  //manejador de evento al hacer click para cada una de las categorias ( conseguidas mediante atributo personalizado en dataset.category)
+  //productos de  categoria en zona central.
+  //el manejador de eventos lo recibira por parámetro siendo este handleProductsCategoryList del CONTROLADOR el cual tras recibir 
+  //la categoria desde dataset conseguira todos los platos de dicha categoria mostrandolos en la VISTA medinate el método
+  //this[VIEW].mostrarInteriorArrays(this[MODEL].getDishesInCategory(categoria), categoria.title);
+  
   bindProductsCategoryList(handler) {
-    const categoryList = document.getElementById('category-list');
-    const links = categoryList.querySelectorAll('a');
+    const categoryList = document.getElementById('category-list'); //lo recojo de las categorias pintadas
+    const links = categoryList.querySelectorAll('a'); //selecciono todos los enlaces
     
     //para cada enlace a asigno escucha pasando al handler el atributo data-category para saber que tiene que mostrar
     for (const link of links) {
