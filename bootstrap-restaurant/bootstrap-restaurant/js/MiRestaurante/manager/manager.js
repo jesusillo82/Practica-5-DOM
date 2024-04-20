@@ -7,17 +7,17 @@ import {
     EmptyValueException,
     InvalidValueException,
     AbstractClassException,
-  } from '../exceptions.js';
+} from '../exceptions.js';
 
-  /*importo clases de entidad */
-  import {
+/*importo clases de entidad */
+import {
     Dish, Category, Allergen, Menu, Restaurant, Coordinate,
-  } from '../entities/entities.js';
-  
-  
-  /* en manager de pablo
-  import { SortedMap } from './sortedmap.js';
-  */
+} from '../entities/entities.js';
+
+
+/* en manager de pablo
+import { SortedMap } from './sortedmap.js';
+*/
 
 
 
@@ -323,7 +323,7 @@ const Manager = (function () {
 
         //------------------------------ METODOS GETTER--------------------------------------------
 
-        
+
         *getterCategories() {
 
             for (let arrayCat of this.#categories) {
@@ -383,14 +383,14 @@ const Manager = (function () {
                         category, // propiedad : la propia categoria a introducir
                         dishes: [], //relacion de platos que pertenece a esa categoria, en principio vacio
                     });
-                   
+
 
                 } else {
                     throw new CategoryExistsException(category); //excepcion de categoria ya existe
                 }
             }
             return this; //hace referencia al objeto manager es decir el que esta instanciado ( variable instanciated). Se usa para poder encadenar el mismo metodo
-           
+
         }
 
         // borrar categoria
@@ -417,11 +417,11 @@ const Manager = (function () {
         #getCategoryPosition(category) {
             //recorre elemento x de la parte correspondiente a category
             //hay que usar este tipo de funciones en vez de bucles for
-            
-            
+
+
             return this.#categories.findIndex((x) => x.category.name === category.name); //funcion callback tipo arrow
 
-            
+
 
         }
 
@@ -430,7 +430,7 @@ const Manager = (function () {
         //------------------------------------------ MENU ---------------------------------------------
 
         // este metodo creara un menuy la guardara en el array #menus
-        addMenu(...menus) { 
+        addMenu(...menus) {
 
             // validacion si existen argumentos de entrada 
             if (arguments.length === 0) {
@@ -460,12 +460,12 @@ const Manager = (function () {
                     throw new MenuExistsException(menu); //existe
                 }
             }
-            return this; 
+            return this;
         }
 
         // dado el array de menu busca indice. 
         #getMenuPosition(menu) {
-            return this.#menus.findIndex((x) => x.menu.name === menu.name); 
+            return this.#menus.findIndex((x) => x.menu.name === menu.name);
 
         }
 
@@ -497,7 +497,7 @@ const Manager = (function () {
             }
 
             // argumentos son del tipo Allergen y no son nulos
-            for (const allerge of alergenos) { 
+            for (const allerge of alergenos) {
                 if (!(allerge instanceof Allergen) || (allerge === null)) {
                     throw new ObjecManagerException('argument', 'Allergen');
                 }
@@ -517,10 +517,10 @@ const Manager = (function () {
 
 
                 } else {
-                    throw new AllergeExistsException(allerge); 
+                    throw new AllergeExistsException(allerge);
                 }
             }
-            return this; 
+            return this;
         }
 
         // borrar alergeno
@@ -545,8 +545,8 @@ const Manager = (function () {
 
         // devuelve posicion de un objeto allerge dentro de la coleccion de alergenos
         #getAllergePosition(allerge) {
-          
-            return this.#alergenos.findIndex((x) => x.allerge.name === allerge.name); 
+
+            return this.#alergenos.findIndex((x) => x.allerge.name === allerge.name);
 
         }
 
@@ -570,7 +570,7 @@ const Manager = (function () {
                     throw new ObjecManagerException('argument', 'Dish');
                 }
 
-            
+
                 // valido si plato existe, sino existe lo añado
                 const position = this.#getDishPosition(plato);
                 if (position === -1) {
@@ -882,7 +882,7 @@ const Manager = (function () {
                     this.#alergenos[pAlergeno].dishes.push(this.#platos[pPlato]);
 
                 }
-                
+
             }
             return this;
         }
@@ -970,7 +970,7 @@ const Manager = (function () {
 
                 }
 
-               
+
             }
             return this;
         }
@@ -1111,9 +1111,9 @@ const Manager = (function () {
 
                 // si no hay función en los argumentos
                 if (funcionOrdenacion) {
-                    array.sort(funcionOrdenacion); 
+                    array.sort(funcionOrdenacion);
                 }
-                
+
                 //recorremos los platos del array
                 for (const plato of array) {
                     yield plato; // yield --> pausa la funcion en ese punto
@@ -1149,7 +1149,7 @@ const Manager = (function () {
                 const array = this.#alergenos[position].dishes;
                 // si hay funcion ordenamos
                 if (funcionOrdenacion) {
-                    array.sort(funcionOrdenacion); 
+                    array.sort(funcionOrdenacion);
                 }
 
                 //recorremos los platos del array
@@ -1161,6 +1161,43 @@ const Manager = (function () {
                 throw new DishNotExistInCategoryException(allerge);
             }
         }
+
+
+
+        //NUEVO iterador para esta práctica que me devuelva los platos asociados a un menu
+        * getDishesInMenu(menu, funcionOrdenacion) {
+
+        // validacion si existen argumentos de entrada 
+        if (arguments.length === 0) {
+            throw new ObjecManagerException('argument', 'menu');
+        }
+        //validamos instancia y null
+        if (!(menu instanceof Menu) || (menu === null)) {
+            throw new ObjecManagerException('menu', 'menu');
+        }
+        //obtenemos posicion del menu
+        const position = this.#getMenuPosition(menu);
+
+        //validamos si menu existe
+        if (position !== -1) {
+            //almacenamos array con los platos asociados a un menu
+            const array = this.#menus[position].dishes;
+            // si hay funcion ordenamos
+            if (funcionOrdenacion) {
+                array.sort(funcionOrdenacion);
+            }
+
+            //recorremos los platos del array
+            for (const plato of array) {
+                yield plato; // yield --> pausa la funcion en ese punto
+            }
+
+        } else {
+            throw new DishNotExistInMenuException (menu);
+        }
+    }
+
+
 
 
         // devuelve iterador con los platos que cumplan un criterio, puede estar ordenado
@@ -1185,7 +1222,7 @@ const Manager = (function () {
 
                 // lo ordeno si existe función
                 if (funcionOrdenacion) {
-                    array.sort(funcionOrdenacion); 
+                    array.sort(funcionOrdenacion);
 
                 }
                 //una vez ordenado lo recorro
@@ -1236,13 +1273,17 @@ const Manager = (function () {
         //crea menu o devuelve
         createMenu(name, description) {
             //busca menu en array 
-            let menu = this.#menus.find((item) => item.menu.name === name);
+            let men = this.#menus.find((item) => item.menu.name === name);
 
             // si no existe lo crea
-            if (!menu) {
-                menu = new Menu(name, description);
+            if (!men) {
+                men = new Menu(name, description);
+                return men;
 
             }
+            //extraigo el objeto menu puesto que #menus almacena { menu:Menu, dishes:Array}
+            const { menu } = men;
+
             return menu;
         }
 
@@ -1251,14 +1292,16 @@ const Manager = (function () {
         //crea alergeno o devuelve
         createAllergen(name, description) {
             //busca allerge en array 
-            let allerge = this.#alergenos.find((item) => item.allerge.name === name);
+            let allergen = this.#alergenos.find((item) => item.allerge.name === name);
 
             // si no existe lo crea
-            if (!allerge) {
-                allerge = new Allergen(name, description);
-
-
+            if (!allergen) {
+                allergen = new Allergen(name, description);
+                return allergen;
             }
+            //extraigo el objeto allerge puesto que #alergenos almacena { allerge:Allerge, dishes:Array}
+            const { allerge } = allergen;
+
             return allerge;
         }
 
@@ -1267,10 +1310,10 @@ const Manager = (function () {
         createCategory(name, description, url) {
             //busca categoria en array. Hay que recordar que categories guarda el objeto literal junto con los platos
             let categori = this.#categories.find((item) => item.category.name === name);
-           
+
             console.log(categori);
-            
-            
+
+
             // si no existe lo crea
             if (!categori) {
                 categori = new Category(name, description, url);
@@ -1279,22 +1322,22 @@ const Manager = (function () {
 
             }
             //extraigo el objeto Category puesto que #categories almacena { category:Category, dishes:Array}
-            const { category} = categori;
+            const { category } = categori;
 
             return category;
 
-           
+
         }
 
 
-        
+
 
 
 
         //crea restaurante o devuelve
         createRestaurant(name, description, location) {
             //busca restaurante en array 
-            let restaurant = this.#restaurantes.find((item) => item.restaurante.name === name);
+            let restaurant = this.#restaurantes.find((item) => item.name === name);
 
             // si no existe lo crea
             if (!restaurant) {
@@ -1306,8 +1349,8 @@ const Manager = (function () {
 
         //añado nuevo metodo createCoordinate para no tener que importar los constructores desde el managerController
         createCoordinate(latitude, longitude) {
-        
-            let coordinate = new Coordinate(latitude,longitude);
+
+            let coordinate = new Coordinate(latitude, longitude);
 
             return coordinate;
         }
@@ -1315,33 +1358,46 @@ const Manager = (function () {
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         //metodos añadidos para práctica 5
 
-        //metodo que devuelve un entero entre un minimo y un maximo incluidos ambos
-        numeroEnteroAleatorio(min,max){
+        //metodo que devuelve un array con numeros aleatorios sin repetir comprendidos entre un minimo y un maximo incluidos ambos
+        numeroEnteroAleatorio(min, max, cantidadNumeros) {
             min = Math.ceil(min);
             max = Math.floor(max);
-            return Math.floor(Math.random() * (max-min *1) + min);
+
+            let arrayNumeros = [];
+            while (arrayNumeros.length < cantidadNumeros) {
+                let numeroAleatorio = Math.floor(Math.random() * (max - min * 1) + min);
+                let existe = false;
+                for (let i = 0; i < arrayNumeros.length; i++) {
+                    if (arrayNumeros[i] == numeroAleatorio) {
+                        existe = true;
+                        break;
+                    }
+                }
+                if (!existe) {
+                    arrayNumeros[arrayNumeros.length] = numeroAleatorio;
+                }
+            }
+            return arrayNumeros;
         }
 
-        //recibe como argumento el numero de platos a mostrar de forma aleatoria y devuelve array con los mismos
+        //recibe como argumento el numero de platos a mostrar de forma aleatoria y devuelve array con los objetos dish
         platosAleatorios(cantidad) {
-            let arrayAleatorio =[];
+            let arrayAleatorio = [];
 
             //compruebo que tenga disponibidad de platos
             if (cantidad <= this.#platos.length) {
-                
-                //genero numeros aleatorios segun cantidad
-                for(let i=0;i<cantidad;i++){
-                    let aleatorio = this.numeroEnteroAleatorio(0,this.#platos.length);
+                //recibo array con las posiciones de los platos
+                let aleatorio = this.numeroEnteroAleatorio(0, this.#platos.length,cantidad);
 
-                    //comprobamos que no se repiitan los numeros aleatorios antes de añadirlos al arrayAleatorio
-
-                    arrayAleatorio.push(this.#platos[aleatorio]);
-                } 
+                //recorro el array con las posiciones de los platos a mostrar
+                for (let i = 0; i < aleatorio.length; i++) {
+                    //añado al array de objetos los platos del array #platos
+                    //de aquellas posiones definidas en array aleatorio 
+                    arrayAleatorio.push(this.#platos[aleatorio[i]]);
+                }
             } else {
-                console.log(" no hay tantos platos disponibles");
-                
+                alert(" no hay tantos platos disponibles, compruebe cantidad");
             }
-
             return arrayAleatorio; //devuelvo array con los platos aleatorios
         }
 

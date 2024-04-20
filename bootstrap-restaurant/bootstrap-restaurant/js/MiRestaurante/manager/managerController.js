@@ -261,6 +261,12 @@ import {
       //añado alergenos al array
       this[MODEL].addAllerge(alergeno1,alergeno2,alergeno3,alergeno4);
       
+      //asigno platos a los alergenos para mostrarlos desde el menu
+      this[MODEL].assignAllergenToDish(alergeno1, plato1,plato2,plato6,plato7); //gluten
+      this[MODEL].assignAllergenToDish(alergeno2, plato2); //crustaceo
+      this[MODEL].assignAllergenToDish(alergeno3, plato2,plato8); //pescado
+      //cacahuete --> no asigno ningun plato
+
       
       
       
@@ -303,14 +309,25 @@ import {
 
       //menu de categorias
       this.onAddCategory();
-      //añade restaurantes al menu
-      this[VIEW].showRestaurantInMenu(this[MODEL].restaurantes);
+      // menu alergenis
+      this.onAddAlergenos();
+
+      // restaurantes
+      this.onAddRestaurantes();
+
+      //menus
+      this.onAddMenus();
+
+
+
+
+      
 
       //añade alergenos al menu
-      this[VIEW].showAlergenostInMenu(this[MODEL].alergenos);
+      //this[VIEW].showAlergenostInMenu(this[MODEL].alergenos);   LO HE MEDIDO EN METODO ONADDALERGENOS
 
       //añade los menus del restaurante al menu
-      this[VIEW].showMenusInMenu(this[MODEL].menus);
+      //this[VIEW].showMenusInMenu(this[MODEL].menus);
 
 
       //para generar menu de categorias en la cabecera una unica vez
@@ -322,7 +339,7 @@ import {
       this[VIEW].showCategoriesEnParteCentral(this[MODEL].categories);
 
 
-      //aleatorio
+      //aleatorio con cantidad 3
       this[VIEW].mostrarPlatosAleatorio(this[MODEL].platosAleatorios(3));
 
 
@@ -341,6 +358,9 @@ import {
       //asignamos funcionalidad para que al clickear nos muestren los platos asociados a las mismas por lo
       //que necesito invocar a los bind pasandole el manejador de evento
       this[VIEW].bindProductsCategoryList(this.handleProductsCategoryList,);
+
+
+    
 
 
 
@@ -365,7 +385,50 @@ import {
     onAddCategory = () => {
       this[VIEW].showCategoriesInMenu(this[MODEL].categories); //pasamos iterador desde el modelo
       //this[VIEW].bindProductsCategoryList(this.handleProductsCategoryList,);
+      this[VIEW].bindProductsCategoryListInMenu(
+        this.handleProductsCategoryList,
+      );
+    
     };
+
+   
+    // alergenos 
+    onAddAlergenos = () => {
+      this[VIEW].showAlergenostInMenu(this[MODEL].alergenos); // mostramos en menu de cabecera
+      this[VIEW].bindProductsAlergenosListInMenu(
+        this.handleProductsAlergenosList
+      );
+    
+    };
+
+    //menus
+    onAddRestaurantes = () => {
+      //añade restaurantes al menu
+      this[VIEW].showRestaurantInMenu(this[MODEL].restaurantes);
+
+      this[VIEW].bindProductsRestauranteListInMenu(
+        this.handleProductsRestaurantList
+      );
+    
+    };
+
+    //menus
+    onAddMenus = () => {
+      this[VIEW].showMenusInMenu(this[MODEL].menus);
+      this[VIEW].bindProductsMenuListInMenu(
+        this.handleProductsMenuList
+      );
+    
+    };
+
+
+
+
+
+
+
+
+
 
     // este manejador lo ejecutare cada vez que haga click en cada una de las categorias para mostrar los platos asociados y sea desde 
     //la parte central o desde el menu De momento no ttiene funcionalidad
@@ -379,10 +442,73 @@ import {
       //pintar lista productos por categoria en zonaCentral
       //this[VIEW].listProducts(this[MODEL].getDishesInCategory(categoria), categoria.title);
 
-      //pintar lista productos por categoria en CARRUSEL
-      this[VIEW].mostrarInteriorArrays(this[MODEL].getDishesInCategory(categoria), categoria.title);
+      //pintar lista de platos por categoria
+      this[VIEW].mostrarInteriorArrays(this[MODEL].getDishesInCategory(categoria), categoria.name);
+      // pinta la ficha de cada plato tras clickear en los platos mostrados con el metodo anterior
+      this[VIEW].bindShowProduct(this.handleShowProduct);
 
     };
+
+
+    //manejador alergenos
+    handleProductsAlergenosList = (title) => {
+      alert(" ejecuto MANEJADOR EVENTO ALERGENOS");
+      const alergeno = this[MODEL].createAllergen(title,"",""); //recupero objeto alergeno o lo creo y recupero
+      //recupero iterador con los platos asociados a esa categoria desde el MODEL
+      //llamo al metodo listProducts de la VISTA pasando como argumento el iterador y el nombre de la categoria
+     
+      //pintar lista productos por categoria en zonaCentral
+      //this[VIEW].listProducts(this[MODEL].getDishesInCategory(categoria), categoria.title);
+
+      //pintar lista productos por alergeno 
+      this[VIEW].mostrarInteriorArrays(this[MODEL].getDishesWithAllergen(alergeno), alergeno.name);
+      // pinta la ficha de cada plato tras clickear en los platos mostrados con el metodo anterior
+      this[VIEW].bindShowProduct(this.handleShowProduct);
+
+    };
+
+
+
+
+    //manejador restaurante
+    handleProductsRestaurantList = (title) => {
+      const restaurante = this[MODEL].createRestaurant(title,"",""); //recupero objeto restaurante o lo creo y recupero
+      
+      //pintar restaurante en parte Central
+      this[VIEW].mostrarDatosRestaurante(restaurante);
+
+    };
+
+
+    //manejador menu
+    handleProductsMenuList = (title) => {
+      alert(" ejecuto MANEJADOR EVENTO MENUS");
+      const menu = this[MODEL].createMenu(title,""); //recupero objeto menu o lo creo y recupero
+      
+      //pintar los platos de cada menu en parte Central
+      this[VIEW].mostrarInteriorArrays(this[MODEL].getDishesInMenu(menu), menu.name);
+      // pinta la ficha de cada plato tras clickear en los platos mostrados con el metodo anterior de cada menu
+      this[VIEW].bindShowProduct(this.handleShowProduct);
+
+    };
+
+    // manejador para mostrar la ficha de cada plato a partir del atributo serial
+    handleShowProduct = (serial) => {
+      //try {
+        const product = this[MODEL].createDish(serial); //recupero el objeto plato, si no existe lo crea y lo devuelve (practica 4 flyweigh)
+        this[VIEW].showProduct(product); //pinta en la vista
+        
+        //this[VIEW].bindShowProductInNewWindow(
+          //this.handleShowProductInNewWindow,
+        //);
+        /* SIMPRE EXISTIRA UN PLATO PUESTO QUE LO CREARA
+      } catch (error) {
+        this[VIEW].showProduct(null, 'no existe este producto en la pagina');
+      }
+      */
+    };
+  
+
 
 
     // creo metodo que recupere medinate  getter el iterador de platos y lo meta como parametro a otro metodo de la vista que

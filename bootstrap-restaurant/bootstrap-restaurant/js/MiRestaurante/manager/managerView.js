@@ -419,6 +419,10 @@ export default ManagerView;
 */
 
 
+
+
+const EXCECUTE_HANDLER = Symbol('excecuteHandler');
+
 // vista modelo Manager
 class ManagerView {
 
@@ -429,14 +433,14 @@ class ManagerView {
     this.main = document.getElementsByTagName('main')[0];
     //elemento categories para mostrarlas
     this.categories = document.getElementById('categories');
-    //elemento menu
+    //elemento menu categorias
     this.menuCat = document.getElementById('menuCabecera');
 
     //prueba zona central
-    this.zonaCentral = document.getElementById('zona central');
+    this.zonaCentral = document.getElementById('zonaCentral');
 
     //prueba zona central titulo
-    this.zonaCentralTitulo = document.getElementById('zona central titulo');
+    this.zonaCentralTitulo = document.getElementById('zonaCentralTitulo');
 
     //parte carrusel para mostrar el contenido de los arrays
     this.mostrarCarrusel = document.getElementById('mostrarCarrusel');
@@ -444,19 +448,27 @@ class ManagerView {
     //mostrar interior arrays
     this.mostrarContenidoArray = document.getElementById('mostrarContenidoArrays');
 
-    
+
 
     //mostrar platos aleatorios al final
     this.aleatorioCarrusel = document.getElementById('myCarousel4');
 
-    
-    
-    
-  
+
+
+
+
 
     //prueba
     this.parteFijaGris = document.getElementById('parteFijaGris');
 
+  }
+
+  [EXCECUTE_HANDLER](handler, handlerArguments, scrollElement, data, url, event) {
+    handler(...handlerArguments);
+    const scroll = document.querySelector(scrollElement);
+    if (scroll) scroll.scrollIntoView();
+    history.pushState(data, null, url);
+    event.preventDefault();
   }
 
   // 4 creamos BIND una vez creados en el CONTROLLER el metodo init onInit y su manejador handleInit
@@ -616,7 +628,7 @@ class ManagerView {
     */
   //metodo que pinta las Categorias recibe un iterador con las categorias
   //data-bs-category son atributos personalizados, se usan para luego cargar todo lo asociado a esa categoria
-  
+
   showCategories(categories) {
 
 
@@ -645,7 +657,7 @@ class ManagerView {
   <a data-bs-category="${category.name}" class="dropdown-item" href="#product-list">${category.name}</a> */
   showCategoriesInMenu(categories) {
 
-  
+
 
     /* elimino para hacer prueba
     const li = document.createElement('li');
@@ -660,7 +672,7 @@ class ManagerView {
     //****++++++++++++++++++++++++++++PPRUEBA */
     const li = document.createElement('li');
     li.classList.add('dropdown');
-    li.insertAdjacentHTML('beforeend', `<a class="dropdown-toggle" href="#"
+    li.insertAdjacentHTML('beforeend', `<a class="dropdown-toggle" href="#" id="menuCate"
 			data-toggle="dropdown">Categorías <b class="caret"></b></a>`);
     const container = document.createElement('ul');
     container.classList.add('dropdown-menu');
@@ -668,7 +680,7 @@ class ManagerView {
     //************************************** */
 
     for (const category of categories) {
-      container.insertAdjacentHTML('beforeend', `<li><a data-bs-category="${category.name}" class="dropdown-item" href="#product-list">${category.name}</a></li>`);
+      container.insertAdjacentHTML('beforeend', `<li><a data-category="${category.name}" class="dropdown-item" href="#product-list">${category.name}</a></li>`);
     }
     li.append(container);
     this.menuCat.append(li);
@@ -678,7 +690,7 @@ class ManagerView {
   //creamos menu con las distintas categorias generando una lista a partir del iterador categories
   showRestaurantInMenu(restaurantes) {
 
-  
+
 
     /* elimino para hacer prueba
     const li = document.createElement('li');
@@ -693,7 +705,7 @@ class ManagerView {
     //****++++++++++++++++++++++++++++PPRUEBA */
     const li = document.createElement('li');
     li.classList.add('dropdown');
-    li.insertAdjacentHTML('beforeend', `<a class="dropdown-toggle" href="#"
+    li.insertAdjacentHTML('beforeend', `<a class="dropdown-toggle" href="#" id="menuRestaurante"
 			data-toggle="dropdown">Restaurantes <b class="caret"></b></a>`);
     const container = document.createElement('ul');
     container.classList.add('dropdown-menu');
@@ -707,12 +719,12 @@ class ManagerView {
     this.menuCat.append(li);
   }
 
-   //creamos menu con alergenos
-   showAlergenostInMenu(alergenos) {
+  //creamos menu con alergenos
+  showAlergenostInMenu(alergenos) {
 
     const li = document.createElement('li');
     li.classList.add('dropdown');
-    li.insertAdjacentHTML('beforeend', `<a class="dropdown-toggle" href="#"
+    li.insertAdjacentHTML('beforeend', `<a class="dropdown-toggle" href="#" id="menuAlergeno"
 			data-toggle="dropdown">Alérgenos <b class="caret"></b></a>`);
     const container = document.createElement('ul');
     container.classList.add('dropdown-menu');
@@ -732,7 +744,7 @@ class ManagerView {
 
     const li = document.createElement('li');
     li.classList.add('dropdown');
-    li.insertAdjacentHTML('beforeend', `<a class="dropdown-toggle" href="#"
+    li.insertAdjacentHTML('beforeend', `<a class="dropdown-toggle" href="#" id="menuDeMenus"
 			data-toggle="dropdown">Menús <b class="caret"></b></a>`);
     const container = document.createElement('ul');
     container.classList.add('dropdown-menu');
@@ -752,11 +764,11 @@ class ManagerView {
   // METIODO PARA MOSTRAR CATEGORIAS EN LA PARTE CENTRAL
   showCategoriesEnParteCentral(categories) {
 
-   // if (this.zonaCentralTitulo.children.length > 1) this.zonaCentralTitulo.children[1].remove();
-   this.zonaCentralTitulo.replaceChildren();
-   this.zonaCentral.replaceChildren();
-   
-    
+    // if (this.zonaCentralTitulo.children.length > 1) this.zonaCentralTitulo.children[1].remove();
+    this.zonaCentralTitulo.replaceChildren();
+    this.zonaCentral.replaceChildren();
+
+
     // parte del titulo
     this.zonaCentralTitulo.insertAdjacentHTML('beforeend',
       `
@@ -767,9 +779,9 @@ class ManagerView {
       </p>
       </div>
       `);
-      //borro hijos zonaCentral
+    //borro hijos zonaCentral
     this.zonaCentral.replaceChildren();
-    
+
     //parte div general
     const container = document.createElement('div');
     container.id = 'category-list';
@@ -779,11 +791,11 @@ class ManagerView {
     hijo.classList.add('row');
 
 
-    
+
 
     for (const category of categories) {
-      hijo.insertAdjacentHTML('beforeend', 
-      `<div class="col-lg-4">
+      hijo.insertAdjacentHTML('beforeend',
+        `<div class="col-lg-4">
         <div class="media">
           <a data-category="${category.name}" href="#product-list">
             <img src="${category.url}" alt="${category.name}" />
@@ -802,17 +814,17 @@ class ManagerView {
 
 
   //METODO MUESTRA CONTENIDO DE LOS ARRAYS
-    // METIODO PARA MOSTRAR CATEGORIAS EN LA PARTE CENTRAL
+  // METIODO PARA MOSTRAR CATEGORIAS EN LA PARTE CENTRAL
   showCategoriesEnParteCentral(categories) {
 
-      // if (this.zonaCentralTitulo.children.length > 1) this.zonaCentralTitulo.children[1].remove();
-      this.zonaCentralTitulo.replaceChildren();
-      this.zonaCentral.replaceChildren();
-      
-       
-       // parte del titulo
-       this.zonaCentralTitulo.insertAdjacentHTML('beforeend',
-         `
+    // if (this.zonaCentralTitulo.children.length > 1) this.zonaCentralTitulo.children[1].remove();
+    this.zonaCentralTitulo.replaceChildren();
+    this.zonaCentral.replaceChildren();
+
+
+    // parte del titulo
+    this.zonaCentralTitulo.insertAdjacentHTML('beforeend',
+      `
          <div class="container">
            <h1>CATEGORIAS</h1>
            <p>
@@ -820,23 +832,23 @@ class ManagerView {
          </p>
          </div>
          `);
-         //borro hijos zonaCentral
-       this.zonaCentral.replaceChildren();
-       
-       //parte div general
-       const container = document.createElement('div');
-       container.id = 'category-list';
-       container.classList.add('container');
-       const hijo = document.createElement('div');
-       container.appendChild(hijo);
-       hijo.classList.add('row');
-   
-   
-       
-   
-       for (const category of categories) {
-         hijo.insertAdjacentHTML('beforeend', 
-         `<div class="col-lg-4">
+    //borro hijos zonaCentral
+    this.zonaCentral.replaceChildren();
+
+    //parte div general
+    const container = document.createElement('div');
+    container.id = 'category-list';
+    container.classList.add('container');
+    const hijo = document.createElement('div');
+    container.appendChild(hijo);
+    hijo.classList.add('row');
+
+
+
+
+    for (const category of categories) {
+      hijo.insertAdjacentHTML('beforeend',
+        `<div class="col-lg-4">
            <div class="media">
              <a data-category="${category.name}" href="#product-list">
                <img src="${category.url}" alt="${category.name}" />
@@ -847,8 +859,8 @@ class ManagerView {
          </div>
    
          `);
-       }
-       this.zonaCentral.append(container);
+    }
+    this.zonaCentral.append(container);
   }
 
 
@@ -895,35 +907,35 @@ class ManagerView {
     // if (this.zonaCentralTitulo.children.length > 1) this.zonaCentralTitulo.children[1].remove();
     this.zonaCentralTitulo.replaceChildren();
     this.zonaCentral.replaceChildren();
-    
-     
-     // parte del titulo
-     this.zonaCentralTitulo.insertAdjacentHTML('beforeend',
-       `
+
+
+    // parte del titulo
+    this.zonaCentralTitulo.insertAdjacentHTML('beforeend',
+      `
        <div class="container">
          <h1>Platos disponibles actualmente</h1>
          <p>
-           Estan son los platos asociados a esta categoria.
+           Estos son los platos asociados a la categoria ${title}.
        </p>
        </div>
        `);
-       //borro hijos zonaCentral
-     this.zonaCentral.replaceChildren();
-     
-     //parte div general
-     const container = document.createElement('div');
-     container.id = 'product-list';
-     container.classList.add('container');
-     const hijo = document.createElement('div');
-     container.appendChild(hijo);
-     hijo.classList.add('row');
- 
- 
-     
- 
-     for (const product of products) {
-       hijo.insertAdjacentHTML('beforeend', 
-       `<div class="col-lg-4">
+    //borro hijos zonaCentral
+    this.zonaCentral.replaceChildren();
+
+    //parte div general
+    const container = document.createElement('div');
+    container.id = 'product-list';
+    container.classList.add('container');
+    const hijo = document.createElement('div');
+    container.appendChild(hijo);
+    hijo.classList.add('row');
+
+
+
+
+    for (const product of products) {
+      hijo.insertAdjacentHTML('beforeend',
+        `<div class="col-lg-4">
          <div class="media">
            <a data-serial="${product.name}" href="#product-list">
              <img src="${product.image}" alt="${product.name}" />
@@ -934,8 +946,8 @@ class ManagerView {
        </div>
  
        `);
-     }
-     this.zonaCentral.append(container);
+    }
+    this.zonaCentral.append(container);
 
 
 
@@ -981,20 +993,65 @@ class ManagerView {
   }
 
   */
-}
-  
+  }
+
+
+  // mostrar datos menus, recibe menu por parámetro para pintar
+  mostrarDatosRestaurante(product) {
+
+
+    this.zonaCentralTitulo.replaceChildren();
+    this.zonaCentral.replaceChildren();
+
+
+    // parte del titulo
+    this.zonaCentralTitulo.insertAdjacentHTML('beforeend',
+      `
+     <div class="container">
+       <h1>Características</h1>
+       <p>
+         Estas son las características del restaurante  ${product.name}.
+     </p>
+     </div>
+     `);
+    //borro hijos zonaCentral
+    this.zonaCentral.replaceChildren();
+
+    //parte div general
+    const container = document.createElement('div');
+    container.id = 'product-list';
+    container.classList.add('container');
+    const hijo = document.createElement('div');
+    container.appendChild(hijo);
+    hijo.classList.add('row');
+
+    hijo.insertAdjacentHTML('beforeend',
+      `<div class="col-lg-4">
+       <div class="media">
+         <h3 class="media-heading text-danger-theme">${product.name}</h3>
+         <h4>Descripcion ${product.description}</h4>
+         <h4>Coordenadas localizacion :${product.location}</h4>
+
+       </div>
+     </div>
+
+     `);
+
+    this.zonaCentral.append(container);
+  }
+
 
 
   /* ++++++++++++++++++++++++++ mostrar Productos en parte carrusel */
   // metodo que dado un nombre de una categoria muestra todos los platos asociados a la misma (products es un iterador)
-  
+
   listProductsCarrusel(products, name) {
     //this.main.replaceChildren();
     if (this.mostrarCarrusel.children.length > 1) this.mostrarCarrusel.children[1].remove();
-    
+
     //padre
     const container = document.createElement('div');
-    container.id='myCarousel1';
+    container.id = 'myCarousel1';
     container.classList.add('carousel-slide');
     container.setAttribute("data-ride", "carousel");
     //hijo1
@@ -1009,7 +1066,7 @@ class ManagerView {
     class="glyphicon glyphicon-chevron-right"></span></a>
       `);
 
-  
+
     // ESTRUCTURA PARA ITEM ACTIVO
     //creo nieto
     const nietoContainer = document.createElement('div');
@@ -1020,7 +1077,7 @@ class ManagerView {
     //creo nieto3
     const nietoContainer3 = document.createElement('div');
     nietoContainer3.classList.add('item');
-    
+
 
 
     //creo hijo del nieto
@@ -1042,7 +1099,7 @@ class ManagerView {
     //añado nieto 3
     nietoContainer3.appendChild(hijoNieto3);
 
-   //añado a la estructura nieto
+    //añado a la estructura nieto
     //nietoContainer.insertAdjacentHTML('beforeend', '<div class="row"> </div>');
 
     alert(" generando estructurra html 1");
@@ -1052,7 +1109,7 @@ class ManagerView {
     al ejecutar appendChild(div) no apareceran 9 inserciones sino solo 3 las demas se copian
     solucion: https://developer.mozilla.org/es/docs/Web/API/Node/appendChild
     */
-    
+
     for (const product of products) {
       let div = document.createElement('div');
 
@@ -1066,14 +1123,14 @@ class ManagerView {
       <h4>${product.name}</h4>
       <!-- boton con enlace para añadir al carrito-->
       <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>`);
-      
+
       //par div1
       div1.classList.add('col-md-4');
       div1.insertAdjacentHTML('beforeend', `<img src="${product.image}" alt="Generic placeholder image">
       <h4>${product.name}</h4>
       <!-- boton con enlace para añadir al carrito-->
       <p><a class="btn btn-default" href="#" role="button">Add to cart &raquo;</a></p>`);
-      
+
       //para div2
       div2.classList.add('col-md-4');
       div2.insertAdjacentHTML('beforeend', `<img src="${product.image}" alt="Generic placeholder image">
@@ -1087,7 +1144,7 @@ class ManagerView {
       hijoNieto2.appendChild(div1);
       hijoNieto3.appendChild(div2);
 
-      
+
 
 
 
@@ -1113,8 +1170,8 @@ class ManagerView {
     //añado a la estructura nieto
     //nietoContainer2.insertAdjacentHTML('beforeend', '<div class="row"> </div>');
 
-   
-   
+
+
 
 
 
@@ -1128,7 +1185,7 @@ class ManagerView {
     hijoContainer1.appendChild(nietoContainer3);
 
 
-     
+
 
 
 
@@ -1155,7 +1212,7 @@ class ManagerView {
 
     //this.main.replaceChildren();
     if (this.aleatorioCarrusel.children.length > 1) this.aleatorioCarrusel.children[1].remove();
-    
+
     //padre
     /*
     const container = document.createElement('div');
@@ -1187,10 +1244,10 @@ class ManagerView {
    //añado a la estructura nieto
     //nietoContainer.insertAdjacentHTML('beforeend', '<div class="row"> </div>');
     */
-    alert(" generando platos aleatorios");
+
     this.aleatorioCarrusel.insertAdjacentHTML('beforeend', `
     <div class="carousel-inner">
-    <div class="item active">
+    <div class="item active" data-bs-interval="2500">
       <div class="row featurette">
 
         <div class="col-md-7">
@@ -1205,7 +1262,7 @@ class ManagerView {
     </div>
 
 
-    <div class="item">
+    <div class="item" data-bs-interval="2500">
       <div class="row featurette">
         <div class="col-md-5">
           <img src=${platos[1].image} alt=${platos[1].name}>
@@ -1218,7 +1275,7 @@ class ManagerView {
     </div>
 
 
-    <div class="item">
+    <div class="item" data-bs-interval="2500">
       <div class="row featurette">
         <div class="col-md-7">
           <h2 class="featurette-heading">${platos[2].name}<span class="text-muted">Increible.</span></h2>
@@ -1236,7 +1293,7 @@ class ManagerView {
     al ejecutar appendChild(div) no apareceran 9 inserciones sino solo 3 las demas se copian
     solucion: https://developer.mozilla.org/es/docs/Web/API/Node/appendChild
     */
-    
+
     //PUEDO DEVOLVER PRIMERO 3 PLATOS DE FORMA ALEATORIA DESDE ARRAY PLATOS
     // Y GUARDARLOS EN UN ARRAY PARA DESPUES RECORRER LOS 3 PLATOS
 
@@ -1289,12 +1346,12 @@ class ManagerView {
 
 
 
-    
-   }
-  
+
+  }
 
 
-  
+
+
   //+++++++++++++++++++++++ metodos bind para generar los productos (platos) asociados a cada categoria 
 
   //una vez pintado el HTML con showCategoriesEnParteCentral(categories) recojo cada uno de los enlaces y les asigno un
@@ -1303,11 +1360,11 @@ class ManagerView {
   //el manejador de eventos lo recibira por parámetro siendo este handleProductsCategoryList del CONTROLADOR el cual tras recibir 
   //la categoria desde dataset conseguira todos los platos de dicha categoria mostrandolos en la VISTA medinate el método
   //this[VIEW].mostrarInteriorArrays(this[MODEL].getDishesInCategory(categoria), categoria.title);
-  
+
   bindProductsCategoryList(handler) {
     const categoryList = document.getElementById('category-list'); //lo recojo de las categorias pintadas
     const links = categoryList.querySelectorAll('a'); //selecciono todos los enlaces
-    
+
     //para cada enlace a asigno escucha pasando al handler el atributo data-category para saber que tiene que mostrar
     for (const link of links) {
       link.addEventListener('click', (event) => {
@@ -1316,7 +1373,61 @@ class ManagerView {
     }
   }
 
+
+  // metodo bin para asignar manejador de evento a cada uno de los platos de manera que sean clickeables. Usamos atributo product-list
+  bindShowProduct(handler) {
+    const productList = document.getElementById('product-list');
+    //const links = productList.querySelectorAll('a.img-wrap');
+
+
+    //para mi ejericio
+    const links = productList.querySelectorAll('a h3');
+
+    console.log("contenido html enlaces desde el nomre"+links);
+    
+    
+    // asigno manejador a los enlaces del nombre
+    for (const link of links) {
+      link.addEventListener('click', (event) => {
+        const { serial } = event.currentTarget.dataset;
+        this[EXCECUTE_HANDLER](
+          handler,
+          [serial],
+          '#single-product',
+          { action: 'showProduct', serial },
+          '#single-product',
+          event,
+        );
+      });
+    }
+    //const images = productList.querySelectorAll('figcaption a');
+
+    //para mi ejercicio
+    const images = productList.querySelectorAll('a');
+
+    console.log("contenido html enlace desde imagenes");
+    console.log(images);
+
+
+    
+    // asigno manejador a los enlaces desde la imagen pasandole el atributo serial desde currentTarget
+    for (const image of images) {
+      image.addEventListener('click', (event) => {
+        const { serial } = event.currentTarget.dataset;
+        this[EXCECUTE_HANDLER](
+          handler,
+          [serial],
+          '#single-product',
+          { action: 'showProduct', serial },
+          '#single-product',
+          event,
+        );
+      });
+    }
+  }
+
   //productos categoria para menu cabecera
+  /*
   bindProductsCategoryListInMenu(handler) {
     const navCats = document.getElementById('navCats');
     const links = navCats.nextSibling.querySelectorAll('a');
@@ -1326,6 +1437,138 @@ class ManagerView {
       });
     }
   }
+  */
+
+
+  //modifico metodo anterior bind
+  bindProductsCategoryListInMenu(handler) {
+    const menuCat = document.getElementById('menuCate');
+    const links = menuCat.nextSibling.querySelectorAll('a');
+    for (const link of links) {
+      link.addEventListener('click', (event) => {
+        handler(event.currentTarget.dataset.category);
+      });
+    }
+  }
+
+
+  //bind para alergenos
+  bindProductsAlergenosListInMenu(handler) {
+    const menuAler = document.getElementById('menuAlergeno');
+    const links = menuAler.nextSibling.querySelectorAll('a');
+    for (const link of links) {
+      link.addEventListener('click', (event) => {
+        handler(event.currentTarget.dataset.category);
+      });
+    }
+  }
+
+  //bind para restaurante
+  bindProductsRestauranteListInMenu(handler) {
+    const menuRes = document.getElementById('menuRestaurante');
+    const links = menuRes.nextSibling.querySelectorAll('a');
+    for (const link of links) {
+      link.addEventListener('click', (event) => {
+        handler(event.currentTarget.dataset.category);
+      });
+    }
+  }
+
+  //bind para menu
+  bindProductsMenuListInMenu(handler) {
+    const menu = document.getElementById('menuDeMenus');
+    const links = menu.nextSibling.querySelectorAll('a');
+    for (const link of links) {
+      link.addEventListener('click', (event) => {
+        handler(event.currentTarget.dataset.category);
+      });
+    }
+  }
+
+
+  //metodo muestra la VISTA con los datos de cada plato o un mensaje en caso de que no se pueda cargar
+  showProduct(product, message) {
+
+    this.zonaCentralTitulo.replaceChildren();
+    this.zonaCentral.replaceChildren();
+
+
+    // parte del titulo
+    this.zonaCentralTitulo.insertAdjacentHTML('beforeend',
+      `
+     <div class="container" id="central">
+       <h1>Características</h1>
+       <p>
+         Estas son las características del plato <b> ${product.name}</b>.
+     </p>
+     </div>
+     `);
+    //borro hijos zonaCentral
+    //this.zonaCentral.replaceChildren();
+
+
+
+
+
+    // METODO  DE PABLO
+
+    //this.main.replaceChildren();
+    //if (this.categories.children.length > 1) this.categories.children[1].remove();
+    const container = document.createElement('div');
+    container.classList.add('container');
+    container.classList.add('mt-5');
+    container.classList.add('mb-5');
+
+    //si existe genero el HTML
+    if (product) {
+      container.id = 'single-product';
+      container.classList.add(`${product.constructor.name}-style`);
+      container.insertAdjacentHTML('beforeend', `<div class="row d-flex justify-content-center">
+        <div class="col-md-10">
+          <div class="card">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="images p-3">
+                  <div class="text-center p-4"> <img id="main-image" src="${product.image}"/> </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="product p-4">
+
+                  <div class="mt-4 mb-3"> 
+                    <p> descripción</p>
+                    <span class="text-uppercase">${product.description}</span>
+                  </div>
+                  
+              
+                  <div class="sizes mt-5">
+                    <p> ingredientes</p>
+                    <span class="text-uppercase">${product.ingredients}</span>
+                  </div>
+                 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>`);
+
+      //const characteristics = container.querySelector('h6');
+      //characteristics.insertAdjacentHTML('afterend', this.instance[product.constructor.name](product));
+
+    } else {
+      container.insertAdjacentHTML(
+        'beforeend',
+        `<div class="row d-flex justify-content-center">
+        ${message}
+      </div>`,
+      );
+    }
+    this.zonaCentral.append(container);
+  }
+
+
+
   //++++++++++++++++++++++++++++++++++++++++
 
 

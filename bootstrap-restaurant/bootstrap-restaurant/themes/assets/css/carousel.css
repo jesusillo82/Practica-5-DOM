@@ -132,6 +132,58 @@ footer{padding:18px 0; background:#111; color:#fff;}
 .mainTitle {padding: 4px 0;border-top: 1px solid #FF8500;background: #FAFAFA;color: #0C0C0C;text-align: center;box-shadow: 0 0 24px #D5D5D5;}
 .cntr{text-align:center}
 
+
+
+
+
+/*ficha carácteristicas platos*/
+#zonaCentral{
+  margin-bottom: 20px;
+  font-size: 21px;
+  line-height: 1.4;
+}
+
+
+#zonaCentral #single-product{
+  background-color: #fff;
+  color: #C83A3A;
+
+}
+#zonaCentral #single-product p{
+  background-color: #fff;
+  color: brown;
+  
+
+}
+
+.navbar-wrapper #menuCabecera{
+  
+  font-size: 21px;
+
+}
+.navbar-wrapper #menuCabecera .dropdown-menu{
+  
+  font-size: 18px;
+}
+
+#zonaCentralTitulo{
+  margin-bottom: 20px;
+  font-size: 21px;
+  line-height: 1.4;
+}
+#zonaCentralTitulo b{
+  margin-bottom: 20px;
+  font-size: 30px;
+  line-height: 1.4;
+  color: #C83A3A;
+} 
+
+
+
+
+
+
+
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 
@@ -178,3 +230,5 @@ footer{padding:18px 0; background:#111; color:#fff;}
     margin-top: 120px;
   }
 }
+
+
