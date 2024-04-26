@@ -713,7 +713,7 @@ class ManagerView {
     //************************************** */
 
     for (const restaurante of restaurantes) {
-      container.insertAdjacentHTML('beforeend', `<li><a data-category="${restaurante.name}" class="dropdown-item" href="#product-list">${restaurante.name}</a></li>`);
+      container.insertAdjacentHTML('beforeend', `<li><a data-restaurant="${restaurante.name}" class="dropdown-item" href="#restaurant-list">${restaurante.name}</a></li>`);
     }
     li.append(container);
     this.menuCat.append(li);
@@ -901,7 +901,7 @@ class ManagerView {
 
 
   //MOSTRAR INTERIOR ARRAYS
-  mostrarInteriorArrays(products, title) {
+  mostrarInteriorArrays(products, objeto) {
 
 
     // if (this.zonaCentralTitulo.children.length > 1) this.zonaCentralTitulo.children[1].remove();
@@ -913,10 +913,15 @@ class ManagerView {
     this.zonaCentralTitulo.insertAdjacentHTML('beforeend',
       `
        <div class="container">
-         <h1>Platos disponibles actualmente</h1>
+         <h1>${objeto.name}</h1>
          <p>
-           Estos son los platos asociados a la categoria ${title}.
-       </p>
+          
+           descripción: ${objeto.description}.
+
+          </p>
+          <h3>Platos disponibles actualmente</h3>
+          <p>
+          </p>
        </div>
        `);
     //borro hijos zonaCentral
@@ -941,7 +946,7 @@ class ManagerView {
              <img src="${product.image}" alt="${product.name}" />
            </a>
            <h3 class="media-heading text-danger-theme">${product.name}</h3>
-           <p>${product.description}</p>
+        
          </div>
        </div>
  
@@ -1469,7 +1474,7 @@ class ManagerView {
     const links = menuRes.nextSibling.querySelectorAll('a');
     for (const link of links) {
       link.addEventListener('click', (event) => {
-        handler(event.currentTarget.dataset.category);
+        handler(event.currentTarget.dataset.restaurant);
       });
     }
   }
@@ -1545,6 +1550,91 @@ class ManagerView {
                   <div class="sizes mt-5">
                     <p> ingredientes</p>
                     <span class="text-uppercase">${product.ingredients}</span>
+                    <p></p>
+                    </div>
+                 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>`);
+
+      //const characteristics = container.querySelector('h6');
+      //characteristics.insertAdjacentHTML('afterend', this.instance[product.constructor.name](product));
+
+    } else {
+      container.insertAdjacentHTML(
+        'beforeend',
+        `<div class="row d-flex justify-content-center">
+        ${message}
+      </div>`,
+      );
+    }
+    this.zonaCentral.append(container);
+  }
+
+
+  //metodo muestra las caracteristicas del restaurante
+  //metodo muestra la VISTA con los datos de cada plato o un mensaje en caso de que no se pueda cargar
+  showRestaurante(restaurant, message) {
+
+    
+   
+    this.zonaCentralTitulo.replaceChildren();
+    this.zonaCentral.replaceChildren();
+
+
+    // parte del titulo
+    this.zonaCentralTitulo.insertAdjacentHTML('beforeend',
+      `
+     <div class="container" id="central">
+       <h1>Características</h1>
+       <p>
+         Estas son las características del restaurante <b> ${restaurant.name}</b>.
+     </p>
+     </div>
+     `);
+    //borro hijos zonaCentral
+    //this.zonaCentral.replaceChildren();
+
+
+
+    
+
+    // METODO  DE PABLO
+
+    //this.main.replaceChildren();
+    //if (this.categories.children.length > 1) this.categories.children[1].remove();
+    const container = document.createElement('div');
+    container.classList.add('container');
+    container.classList.add('mt-5');
+    container.classList.add('mb-5');
+
+    //si existe genero el HTML
+    if (restaurant) {
+      container.id = 'restaurant-list';
+      container.classList.add(`${restaurant.constructor.name}-style`);
+      container.insertAdjacentHTML('beforeend', `<div class="row d-flex justify-content-center">
+        <div class="col-md-10">
+          <div class="card">
+            <div class="row">
+              <div class="col-md-6">
+                
+              </div>
+              <div class="col-md-6" id ="divFichaPlato">
+                <div class="product p-4" >
+
+                  <div class="mt-4 mb-3"> 
+                    <p> descripción</p>
+                    <span class="text-uppercase">${restaurant.description}</span>
+                    <p></p>
+                    </div>
+                  
+              
+                  <div class="sizes mt-5">
+                    <p> localizacion</p>
+                    <span class="text-uppercase">${restaurant.location}</span>
                     <p></p>
                     </div>
                  

@@ -271,7 +271,7 @@ import {
       
       
       // c) creo 3 menús. 
-      const menu1 = this[MODEL].createMenu('semana Santa', ' constara de primer plato, segundo plato, postre, pan y una bebida,con opción de vigilia, precio 35 euros,');
+      const menu1 = this[MODEL].createMenu('Semana Santa', ' constara de primer plato, segundo plato, postre, pan y una bebida,con opción de vigilia, precio 35 euros,');
       const menu2 = this[MODEL].createMenu('diario', ' constara de primer plato, segundo plato, postre, pan y una bebida, precio 15 euros');
       const menu3 = this[MODEL].createMenu('navidad', ' constara de dos entrantes, primer plato, segundo plato, postre, pan y dos consumiciones y una copa, precio 50 euros');
       
@@ -443,7 +443,7 @@ import {
       //this[VIEW].listProducts(this[MODEL].getDishesInCategory(categoria), categoria.title);
 
       //pintar lista de platos por categoria
-      this[VIEW].mostrarInteriorArrays(this[MODEL].getDishesInCategory(categoria), categoria.name);
+      this[VIEW].mostrarInteriorArrays(this[MODEL].getDishesInCategory(categoria), categoria);
       // pinta la ficha de cada plato tras clickear en los platos mostrados con el metodo anterior
       this[VIEW].bindShowProduct(this.handleShowProduct);
 
@@ -461,7 +461,7 @@ import {
       //this[VIEW].listProducts(this[MODEL].getDishesInCategory(categoria), categoria.title);
 
       //pintar lista productos por alergeno 
-      this[VIEW].mostrarInteriorArrays(this[MODEL].getDishesWithAllergen(alergeno), alergeno.name);
+      this[VIEW].mostrarInteriorArrays(this[MODEL].getDishesWithAllergen(alergeno), alergeno);
       // pinta la ficha de cada plato tras clickear en los platos mostrados con el metodo anterior
       this[VIEW].bindShowProduct(this.handleShowProduct);
 
@@ -475,7 +475,7 @@ import {
       const restaurante = this[MODEL].createRestaurant(title,"",""); //recupero objeto restaurante o lo creo y recupero
       
       //pintar restaurante en parte Central
-      this[VIEW].mostrarDatosRestaurante(restaurante);
+      this[VIEW].showRestaurante(restaurante);
 
     };
 
@@ -486,7 +486,7 @@ import {
       const menu = this[MODEL].createMenu(title,""); //recupero objeto menu o lo creo y recupero
       
       //pintar los platos de cada menu en parte Central
-      this[VIEW].mostrarInteriorArrays(this[MODEL].getDishesInMenu(menu), menu.name);
+      this[VIEW].mostrarInteriorArrays(this[MODEL].getDishesInMenu(menu), menu);
       // pinta la ficha de cada plato tras clickear en los platos mostrados con el metodo anterior de cada menu
       this[VIEW].bindShowProduct(this.handleShowProduct);
 
