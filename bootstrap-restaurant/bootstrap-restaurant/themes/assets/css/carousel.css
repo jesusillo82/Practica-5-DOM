@@ -137,6 +137,20 @@ footer{padding:18px 0; background:#111; color:#fff;}
 
 
 /*ficha carácteristicas platos*/
+
+
+
+#divFichaPlato{
+  border: #c83a3a;
+  margin-bottom: 20px;
+  font-size: 21px;
+  line-height: 1.4;
+  background-color: beige;
+  
+  padding: 30px;
+}
+
+
 #zonaCentral{
   margin-bottom: 20px;
   font-size: 21px;
@@ -145,15 +159,18 @@ footer{padding:18px 0; background:#111; color:#fff;}
 
 
 #zonaCentral #single-product{
-  background-color: #fff;
+  background-color: whitesmoke;
+  padding-top: 20px;
+  padding-bottom: 20px;
   color: #C83A3A;
-
-}
-#zonaCentral #single-product p{
-  background-color: #fff;
-  color: brown;
   
+}
 
+#zonaCentral #single-product p{
+  
+  color: brown;
+  font-weight: bold;
+  background-color: burlywood;
 }
 
 .navbar-wrapper #menuCabecera{

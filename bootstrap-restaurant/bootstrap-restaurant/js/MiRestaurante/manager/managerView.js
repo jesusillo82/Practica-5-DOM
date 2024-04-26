@@ -1532,19 +1532,21 @@ class ManagerView {
                   <div class="text-center p-4"> <img id="main-image" src="${product.image}"/> </div>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="product p-4">
+              <div class="col-md-6" id ="divFichaPlato">
+                <div class="product p-4" >
 
                   <div class="mt-4 mb-3"> 
                     <p> descripción</p>
                     <span class="text-uppercase">${product.description}</span>
-                  </div>
+                    <p></p>
+                    </div>
                   
               
                   <div class="sizes mt-5">
                     <p> ingredientes</p>
                     <span class="text-uppercase">${product.ingredients}</span>
-                  </div>
+                    <p></p>
+                    </div>
                  
                 </div>
               </div>
