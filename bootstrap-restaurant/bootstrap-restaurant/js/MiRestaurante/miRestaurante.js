@@ -6,12 +6,14 @@ import ManagerApp from './manager/managerApp.js';
 const historyActions = {
   init: () => {
     ManagerApp.handleInit();
-    ShoppingCartApp.handleInit();
   },
-  showShoppingCart: () => ShoppingCartApp.handleShowShoppingCart(),
+  
   productsCategoryList: (event) => ManagerApp.handleProductsCategoryList(event.state.category),
-  productsTypeList: (event) =>	ManagerApp.handleProductsTypeList(event.state.type),
-  showProduct: (event) => ManagerApp.handleShowProduct(event.state.serial),
+  productsAlergenosList: (event) => ManagerApp.handleProductsAlergenosList(event.state.category),
+  productsRestaurantList: (event) => ManagerApp.handleProductsRestaurantList(event.state.category),
+  productsMenuList: (event) => ManagerApp.handleProductsMenuList(event.state.category),
+  
+  mostrarFichaPlato: (event) => ManagerApp.handleMostrarFichaPlato(event.state.name),
 };
 
 window.addEventListener('popstate', (event) => {

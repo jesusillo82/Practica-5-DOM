@@ -1,202 +1,10 @@
-/* Controlador del patrón VISTA-MODELO-CONTROLADOR
-*/
-/*
-import {
-    Laptop, Camera, Smartphone, Tablet,
-  } from './manager.js';
-  
-  */
+/* Controlador del patrón VISTA-MODELO-CONTROLADOR*/
 
-  /*
-  const MODEL = Symbol('ShoppingCartModel');
-  const VIEW = Symbol('ShoppingCartView');
-  const LOAD_MANAGER_OBJECTS = Symbol('Load Manager Objects'); //variable privada
-  
-  class ManagerController {
-    constructor(model, view) {
-      this[MODEL] = model;
-      this[VIEW] = view;
-
-      //comprobacion funcionamiento
-      alert();
-  
-      this.onLoad(); //cargamos
-      this.onInit(); //cargamos
-  
-      this[VIEW].bindInit(this.handleInit);
-  
-      // this.onInit();
-      // this.onAddCategory();
-    }
-  
-    // en esta ocasion y con diferencia al shopingCart aqui se carga todo de MANERA INTERNA de esta forma no es
-    // necesario hacer publicos los constructores de las ENTIDADES importandolas al principio
-    // en otras practicas esta carga de objetos se realizará desde el SERVIDOR
-    
-    [LOAD_MANAGER_OBJECTS]() {
-      const category1 = this[MODEL].getCategory('Apple', 'img/brands/apple.png');
-      const category2 = this[MODEL].getCategory('HP', 'img/brands/HP.png');
-      const category3 = this[MODEL].getCategory('Microsoft', 'img/brands/microsoft.png');
-      const category4 = this[MODEL].getCategory('Samsung', 'img/brands/samsung.png');
-      category1.description = 'Think Different.';
-      category2.description = 'HP makes technology work for you.';
-      category3.description = 'Be what\'s next.';
-      category4.description = 'Designed For.';
-  
-      //añado al modelo
-      this[MODEL].addCategory(category1, category2, category3, category4);
-  
-      const product1 = this[MODEL].getProduct('1', 'Apple', 'Laptop Model1', 1100, 'Laptop');
-      const product2 = this[MODEL].getProduct('2', 'Apple', 'Camera Model2', 1200, 'Camera');
-      const product3 = this[MODEL].getProduct('3', 'Apple', 'Smartphone Model3', 1300, 'Smartphone');
-      const product4 = this[MODEL].getProduct('4', 'Apple', 'Tablet Model4', 1400, 'Tablet');
-      const product5 = this[MODEL].getProduct('5', 'Apple', 'Laptop Model5', 1500, 'Laptop');
-      const product6 = this[MODEL].getProduct('6', 'HP', 'Laptop Model1', 2100, 'Laptop');
-      const product7 = this[MODEL].getProduct('7', 'HP', 'Camera Model2', 2200, 'Camera');
-      const product8 = this[MODEL].getProduct('8', 'HP', 'Tablet Model3', 2300, 'Tablet');
-      const product9 = this[MODEL].getProduct('9', 'HP', 'Smartphone Model4', 2400, 'Smartphone');
-      const product10 = this[MODEL].getProduct('10', 'HP', 'Laptop Model5', 2500, 'Laptop');
-      const product11 = this[MODEL].getProduct('11', 'Microsoft', 'Laptop Model1', 3100, 'Laptop');
-      const product12 = this[MODEL].getProduct('12', 'Microsoft', 'Camera Model2', 3200, 'Camera');
-      const product13 = this[MODEL].getProduct('13', 'Microsoft', 'Tablet Model3', 3300, 'Tablet');
-      const product14 = this[MODEL].getProduct('14', 'Microsoft', 'Smartphone Model4', 3400, 'Smartphone');
-      const product15 = this[MODEL].getProduct('15', 'Microsoft', 'Laptop Model5', 3500, 'Laptop');
-      const product16 = this[MODEL].getProduct('16', 'Samsung', 'Laptop Model1', 4100, 'Laptop');
-      const product17 = this[MODEL].getProduct('17', 'Samsung', 'Camera Model2', 4200, 'Camera');
-      const product18 = this[MODEL].getProduct('18', 'Samsung', 'Tablet Model3', 4300, 'Tablet');
-      const product19 = this[MODEL].getProduct('19', 'Samsung', 'Tablet Model4', 4400, 'Tablet');
-      const product20 = this[MODEL].getProduct('20', 'Samsung', 'Laptop Model5', 4500, 'Laptop');
-  
-      product1.url = `https://via.placeholder.com/258x172.jpg?text=${product1.brand}+${product1.model}`;
-      product2.url = `https://via.placeholder.com/258x172.jpg?text=${product2.brand}+${product2.model}`;
-      product3.url = `https://via.placeholder.com/258x172.jpg?text=${product3.brand}+${product3.model}`;
-      product4.url = `https://via.placeholder.com/258x172.jpg?text=${product4.brand}+${product4.model}`;
-      product5.url = `https://via.placeholder.com/258x172.jpg?text=${product5.brand}+${product5.model}`;
-      product6.url = `https://via.placeholder.com/258x172.jpg?text=${product6.brand}+${product6.model}`;
-      product7.url = `https://via.placeholder.com/258x172.jpg?text=${product7.brand}+${product7.model}`;
-      product8.url = `https://via.placeholder.com/258x172.jpg?text=${product8.brand}+${product8.model}`;
-      product9.url = `https://via.placeholder.com/258x172.jpg?text=${product9.brand}+${product9.model}`;
-      product10.url = `https://via.placeholder.com/258x172.jpg?text=${product10.brand}+${product10.model}`;
-      product11.url = `https://via.placeholder.com/258x172.jpg?text=${product11.brand}+${product11.model}`;
-      product12.url = `https://via.placeholder.com/258x172.jpg?text=${product12.brand}+${product12.model}`;
-      product13.url = `https://via.placeholder.com/258x172.jpg?text=${product13.brand}+${product13.model}`;
-      product14.url = `https://via.placeholder.com/258x172.jpg?text=${product14.brand}+${product14.model}`;
-      product15.url = `https://via.placeholder.com/258x172.jpg?text=${product15.brand}+${product15.model}`;
-      product16.url = `https://via.placeholder.com/258x172.jpg?text=${product16.brand}+${product16.model}`;
-      product17.url = `https://via.placeholder.com/258x172.jpg?text=${product17.brand}+${product17.model}`;
-      product18.url = `https://via.placeholder.com/258x172.jpg?text=${product18.brand}+${product18.model}`;
-      product19.url = `https://via.placeholder.com/258x172.jpg?text=${product19.brand}+${product19.model}`;
-      product20.url = `https://via.placeholder.com/258x172.jpg?text=${product20.brand}+${product20.model}`;
-      product1.description = `Descripción ${product1.model}`;
-      product2.description = `Descripción ${product2.model}`;
-      product3.description = `Descripción ${product3.model}`;
-      product4.description = `Descripción ${product4.model}`;
-      product5.description = `Descripción ${product5.model}`;
-      product6.description = `Descripción ${product6.model}`;
-      product7.description = `Descripción ${product7.model}`;
-      product8.description = `Descripción ${product8.model}`;
-      product9.description = `Descripción ${product9.model}`;
-      product10.description = `Descripción ${product10.model}`;
-      product11.description = `Descripción ${product11.model}`;
-      product12.description = `Descripción ${product12.model}`;
-      product13.description = `Descripción ${product13.model}`;
-      product14.description = `Descripción ${product14.model}`;
-      product15.description = `Descripción ${product15.model}`;
-      product16.description = `Descripción ${product16.model}`;
-      product17.description = `Descripción ${product17.model}`;
-      product18.description = `Descripción ${product18.model}`;
-      product19.description = `Descripción ${product19.model}`;
-      product20.description = `Descripción ${product20.model}`;
-  
-      //añado a distintas categorias
-      this[MODEL].addProductInCategory(category1, product1, product2, product3, product4, product5);
-      this[MODEL].addProductInCategory(category2, product6, product7, product8, product9, product10);
-      this[MODEL].addProductInCategory(category3, product11, product12, product13, product14, product15);
-      this[MODEL].addProductInCategory(category4, product16, product17, product18, product19, product20);
-    }
-  
-    // Eventos de aplicación
-  
-    //evento de carga deberemos invocarlo desde el constructor
-    onLoad = () => {
-      this[LOAD_MANAGER_OBJECTS]();
-      this[VIEW].showProductTypes();
-      this[VIEW].showProductTypesInMenu();
-      this.onAddCategory();
-      this[VIEW].bindProductsTypeList(this.handleProductsTypeList);
-      this[VIEW].bindProductsTypeListInMenu(this.handleProductsTypeList);
-    };
-  
-    //carga de inicio debera ser invocado desde constructor
-    onInit = () => {
-      this[VIEW].showCategories(this[MODEL].categories);
-      this[VIEW].bindProductsCategoryList(
-        this.handleProductsCategoryList,
-      );
-    };
-  
-    onAddCategory = () => {
-      this[VIEW].showCategoriesInMenu(this[MODEL].categories);
-      this[VIEW].bindProductsCategoryListInMenu(
-        this.handleProductsCategoryList,
-      );
-    };
-  
-    // Métodos handlers
-  
-    handleInit = () => { //manejador de inicio, en la VISTA definimos su metodo bind para darle funcionalidad
-      this.onInit();
-    };
-  
-    handleProductsCategoryList = (title) => {
-      const category = this[MODEL].getCategory(title);
-      this[VIEW].listProducts(this[MODEL].getCategoryProducts(category), category.title);
-      this[VIEW].bindShowProduct(this.handleShowProduct);
-    };
-  
-    handleProductsTypeList = (type) => {
-      const instance = {
-        Laptop,
-        Camera,
-        Smartphone,
-        Tablet,
-      };
-      if (instance[type]) {
-        this[VIEW].listProducts(this[MODEL].getTypeProducts(instance[type]), type);
-        this[VIEW].bindShowProduct(this.handleShowProduct);
-      } else {
-        throw new Error(`${type} isn't a type of Product.`);
-      }
-    };
-  
-    handleShowProduct = (serial) => {
-      try {
-        const product = this[MODEL].getProduct(serial);
-        this[VIEW].showProduct(product);
-        this[VIEW].bindShowProductInNewWindow(
-          this.handleShowProductInNewWindow,
-        );
-      } catch (error) {
-        this[VIEW].showProduct(null, 'No existe este producto en la página.');
-      }
-    };
-  
-    handleShowProductInNewWindow = (serial) => {
-      try {
-        const product = this[MODEL].getProduct(serial);
-        this[VIEW].showProductInNewWindow(product);
-      } catch (error) {
-        this[VIEW].showProductInNewWindow(null, 'No existe este producto en la página.');
-      }
-    };
-  }
-  
-  export default ManagerController;
-  */
+/* los numeros que aparecen junto a los comentarios hacen referencia a los pasos para ir elaborando la tarea según tutoria*/
 
   //1 variables privadas, lo que viene entre '' es solo a titulo descriptivo
-  const MODEL = Symbol('ShoppingCartModel');
-  const VIEW = Symbol('ShoppingCartView');
+  const MODEL = Symbol('RestaurantModel');
+  const VIEW = Symbol('RestaurantView');
   //2 carga de objetos
   const LOAD_MANAGER_OBJECTS = Symbol('Load Manager Objects'); 
 
@@ -210,8 +18,6 @@ import {
       this.onLoad(); // 3 ejecuto metodo de carga dentro del constructor, luego pintaremos en VISTA
       this.onInit(); // 4 ejecuto metodo inicio
       this[VIEW].bindInit(this.handleInit); // 5 metodo bindInit lo creo en VISTA y ejecuto desde aqui, pasandole el manejador para conseguir modelo vista controlador
-
-      //comprobacion funcionamiento
       
     }
 
@@ -265,11 +71,8 @@ import {
       this[MODEL].assignAllergenToDish(alergeno1, plato1,plato2,plato6,plato7); //gluten
       this[MODEL].assignAllergenToDish(alergeno2, plato2); //crustaceo
       this[MODEL].assignAllergenToDish(alergeno3, plato2,plato8); //pescado
-      //cacahuete --> no asigno ningun plato
+      //cacahuete --> no le asigno ningun plato
 
-      
-      
-      
       // c) creo 3 menús. 
       const menu1 = this[MODEL].createMenu('Semana Santa', ' constara de primer plato, segundo plato, postre, pan y una bebida,con opción de vigilia, precio 35 euros,');
       const menu2 = this[MODEL].createMenu('diario', ' constara de primer plato, segundo plato, postre, pan y una bebida, precio 15 euros');
@@ -301,48 +104,19 @@ import {
       //carga objetos
       this[LOAD_MANAGER_OBJECTS](); // cargo todos los objetos creados
       
-      //alert("Los objetos han sido cargados al Manager, dentro de onLOAD");
-      //this[VIEW].showProductTypes(); // cargo metodo VISTA con las categorias
-
-      //añade categorias al menu
-      //this[VIEW].showCategoriesInMenu(this[MODEL].categories);
-
-      //menu de categorias
+      //carga menu categorias y bind asociado
       this.onAddCategory();
-      // menu alergenis
+      //carga menu alergenos y bind asociado
       this.onAddAlergenos();
-
-      // restaurantes
+      // carga menu restaurantes y bind asociado
       this.onAddRestaurantes();
-
-      //menus
+      //carga menu de menus y bind asociado
       this.onAddMenus();
 
-
-
-
-      
-
-      //añade alergenos al menu
-      //this[VIEW].showAlergenostInMenu(this[MODEL].alergenos);   LO HE MEDIDO EN METODO ONADDALERGENOS
-
-      //añade los menus del restaurante al menu
-      //this[VIEW].showMenusInMenu(this[MODEL].menus);
-
-
-      //para generar menu de categorias en la cabecera una unica vez
-      //this.onAddCategory();
-
-      //prueba mostrar categorias
-      //this[VIEW].showCategories(this[MODEL].categories);
-
-      this[VIEW].showCategoriesEnParteCentral(this[MODEL].categories);
-
-
-      //aleatorio con cantidad 3
+      //muestra 3 platos aleatorios tras menu de cabecera
       this[VIEW].mostrarPlatosAleatorio(this[MODEL].platosAleatorios(3));
-
-
+      //muestra las categorias disponibles en la parte central
+      this[VIEW].showCategoriesEnParteCentral(this[MODEL].categories);
     };
 
     //4 +++++++++++++++++++++++++++++ INIT Y MANEJADOR PARA EL INIT
@@ -350,26 +124,13 @@ import {
     //carga de inicio debera ser invocado desde constructor
     onInit = () => {
 
-      //alert("iniciamos el Manager dentro de onInit");
-
+     
       //muestro las categorias en la parte central
       this[VIEW].showCategoriesEnParteCentral(this[MODEL].categories);
 
       //asignamos funcionalidad para que al clickear nos muestren los platos asociados a las mismas por lo
       //que necesito invocar a los bind pasandole el manejador de evento
       this[VIEW].bindProductsCategoryList(this.handleProductsCategoryList,);
-
-
-    
-
-
-
-      //pintara todas las categorias que tenemos en el array cargado
-      //this[VIEW].showCategories(this[MODEL].categories);
-      
-      
-
-      
       
     };
 
@@ -401,7 +162,7 @@ import {
     
     };
 
-    //menus
+    //restaurantes
     onAddRestaurantes = () => {
       //añade restaurantes al menu
       this[VIEW].showRestaurantInMenu(this[MODEL].restaurantes);
@@ -422,52 +183,32 @@ import {
     };
 
 
-
-
-
-
-
-
-
-
     // este manejador lo ejecutare cada vez que haga click en cada una de las categorias para mostrar los platos asociados y sea desde 
     //la parte central o desde el menu De momento no ttiene funcionalidad
     //por lo que necesito crear un BIND
-    handleProductsCategoryList = (title) => {
-      alert(" ejecuto MANEJADOR EVENTO");
-      const categoria = this[MODEL].createCategory(title,"",""); //recupero objeto caategoria
-      //recupero iterador con los platos asociados a esa categoria desde el MODEL
-      //llamo al metodo listProducts de la VISTA pasando como argumento el iterador y el nombre de la categoria
+    handleProductsCategoryList = (name) => {
+     // alert(" ejecuto MANEJADOR EVENTO");
+      const categoria = this[MODEL].createCategory(name,"",""); //recupero objeto caategoria
      
-      //pintar lista productos por categoria en zonaCentral
-      //this[VIEW].listProducts(this[MODEL].getDishesInCategory(categoria), categoria.title);
-
       //pintar lista de platos por categoria
       this[VIEW].mostrarInteriorArrays(this[MODEL].getDishesInCategory(categoria), categoria);
       // pinta la ficha de cada plato tras clickear en los platos mostrados con el metodo anterior
-      this[VIEW].bindShowProduct(this.handleShowProduct);
+      this[VIEW].bindMostrarFichaPlato(this.handleMostrarFichaPlato);
 
     };
 
 
     //manejador alergenos
-    handleProductsAlergenosList = (title) => {
-      alert(" ejecuto MANEJADOR EVENTO ALERGENOS");
-      const alergeno = this[MODEL].createAllergen(title,"",""); //recupero objeto alergeno o lo creo y recupero
-      //recupero iterador con los platos asociados a esa categoria desde el MODEL
-      //llamo al metodo listProducts de la VISTA pasando como argumento el iterador y el nombre de la categoria
-     
-      //pintar lista productos por categoria en zonaCentral
-      //this[VIEW].listProducts(this[MODEL].getDishesInCategory(categoria), categoria.title);
-
+    handleProductsAlergenosList = (name) => {
+      //alert(" ejecuto MANEJADOR EVENTO ALERGENOS");
+      const alergeno = this[MODEL].createAllergen(name,"",""); //recupero objeto alergeno o lo creo y recupero
+    
       //pintar lista productos por alergeno 
       this[VIEW].mostrarInteriorArrays(this[MODEL].getDishesWithAllergen(alergeno), alergeno);
       // pinta la ficha de cada plato tras clickear en los platos mostrados con el metodo anterior
-      this[VIEW].bindShowProduct(this.handleShowProduct);
+      this[VIEW].bindMostrarFichaPlato(this.handleMostrarFichaPlato);
 
     };
-
-
 
 
     //manejador restaurante
@@ -482,39 +223,23 @@ import {
 
     //manejador menu
     handleProductsMenuList = (title) => {
-      alert(" ejecuto MANEJADOR EVENTO MENUS");
+      //alert(" ejecuto MANEJADOR EVENTO MENUS");
       const menu = this[MODEL].createMenu(title,""); //recupero objeto menu o lo creo y recupero
       
       //pintar los platos de cada menu en parte Central
       this[VIEW].mostrarInteriorArrays(this[MODEL].getDishesInMenu(menu), menu);
       // pinta la ficha de cada plato tras clickear en los platos mostrados con el metodo anterior de cada menu
-      this[VIEW].bindShowProduct(this.handleShowProduct);
+      this[VIEW].bindMostrarFichaPlato(this.handleMostrarFichaPlato);
 
     };
 
-    // manejador para mostrar la ficha de cada plato a partir del atributo serial
-    handleShowProduct = (serial) => {
-      //try {
-        const product = this[MODEL].createDish(serial); //recupero el objeto plato, si no existe lo crea y lo devuelve (practica 4 flyweigh)
-        this[VIEW].showProduct(product); //pinta en la vista
+    // manejador para mostrar la ficha de cada plato a partir del atributo name
+    handleMostrarFichaPlato = (name) => {
+      
+        const plato = this[MODEL].createDish(name); //recupero el objeto plato, si no existe lo crea y lo devuelve (practica 4 flyweigh)
+        this[VIEW].mostrarFichaPlato(plato); //pinta en la vista
         
-        //this[VIEW].bindShowProductInNewWindow(
-          //this.handleShowProductInNewWindow,
-        //);
-        /* SIMPRE EXISTIRA UN PLATO PUESTO QUE LO CREARA
-      } catch (error) {
-        this[VIEW].showProduct(null, 'no existe este producto en la pagina');
-      }
-      */
     };
-  
-
-
-
-    // creo metodo que recupere medinate  getter el iterador de platos y lo meta como parametro a otro metodo de la vista que
-    //muestre de forma aleatoria
-
-
 
   } //fin class
 

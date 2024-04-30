@@ -41,38 +41,21 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="description" content="Tarea 5 Desarrollo Web en entrono cliente DAW">
+  <meta name="author" content="Jesús Bernabé Imedio Perea">
   <link rel="shortcut icon" href="themes/assets/ico/favicon.ico">
   <title>Tarea 5 DOM</title>
 
   <!-- Bootstrap core CSS -->
   <link href="themes/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  
-
-  <!-- Just for debugging purposes. Don't actually copy this line! -->
-  <!--[if lt IE 9]><script src="themes/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-  <!-- Custom styles for this template -->
+  <!-- hoja estilo css -->
   <link href="themes/assets/css/carousel.css" rel="stylesheet">
 
 </head>
 
-
-
-<!-- NAVBAR
-================================================== -->
-
 <body>
 
-  
 
   <!--menu navegacion superior-->
   <div class="navbar-wrapper">
@@ -88,23 +71,13 @@
               <span class="icon-bar"></span>
             </button>
 
-            <!-- añado id logo a Mi Restaurante-->
-            <a id="logo"   class="navbar-brand" href="index.html">Mi Restaurante</a>
           </div>
           <div class="navbar-collapse collapse">
             <ul id="menuCabecera"  class="nav navbar-nav">
 
-
-              <!-- MODIFICO ESTA PARTE PARA ADAPTAR A LA TUTORIA
-              <li class="active"><a href="index.html">Home</a></li>
-              -->
-              
-              <li class="active">
+              <li>
                 <a id="init"  href="#">Inicio</a>
               </li>
-
-              <li><a href="enunciado.html">Enunciado</a></li>
-
 
               <!-- Menu desplegable categorias-->
               <!-- Menu desplegable restaurantes-->
@@ -112,7 +85,6 @@
               <!-- Menu desplegable alergenos-->
               <!-- Menu desplegable de menus-->
 
-              
             </ul>
           </div>
         </div>
@@ -123,90 +95,17 @@
 
   <!-- navegacion con migas de pan-->
   <div>
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Categorias</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Sección actual</li>
-      </ol>
-    </nav>
+    
 
   </div>
   
-  
-
-
-
-
-  
-
-
-  <!-- Carousel
-    ================================================== -->
-  
-    
-
-
-  
-
   <!-- carrusel con los 3 platos mostrados de forma aleatoria-->
 
   <div class="container marketing">
     <div id="myCarousel4" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <!--
-      <div class="carousel-inner">
-        <div class="item active">
-          <div class="row featurette">
-
-            <div class="col-md-7">
-              <h2 class="featurette-heading">Fish and Chips <span class="text-muted">It's very very testy</span></h2>
-              <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis
-                euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus
-                ac cursus commodo.</p>
-            </div>
-            <div class="col-md-5">
-              <img src="themes/assets/images/fish-and-chips.png" alt="Fish and Chips">
-            </div>
-
-          </div>
-        </div>
-
-
-        <div class="item">
-          <div class="row featurette">
-            <div class="col-md-5">
-              <img src="themes/assets/images/burger.png" alt="Generic placeholder image">
-            </div>
-            <div class="col-md-7">
-              <h2 class="featurette-heading">Oh yeah, very nice Burger. <span class="text-muted">Delicious.</span></h2>
-              <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis
-                euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus
-                ac cursus commodo.</p>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="item">
-          <div class="row featurette">
-            <div class="col-md-7">
-              <h2 class="featurette-heading">Try yourself <span class="text-muted">Testy</span></h2>
-              <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis
-                euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus
-                ac cursus commodo.</p>
-            </div>
-            <div class="col-md-5">
-              <img class="img-circle" src="themes/assets/images/drinks.png" alt="Generic placeholder image">
-            </div>
-          </div>
-        </div>
-      </div>
-    -->
-    </div><!-- /.carousel -->
-  </div><!-- /.container -->
-
-
+      
+    </div>
+  </div>
 
   <!-- div bienvenida-->
   <div class="introSection">
@@ -234,70 +133,35 @@
   </div>
 
 
-  
-
-
-
-  <!-- zona para mostrar interior de los arrays-->
-  <div id="mostrarContenidoArrays"   class="container marketing">
-    
-  </div>
-
-
-
-
-
-
-
- 
-
-  
-
-
-
-
-
-
-
-
-<!-- penultima seccion que muestra 3 platos especiales con su descripcion
-y acceso al menu principal-->
-  <div id="parteFijaGris"    class="highlightSection">
-    
-  </div>
-
-
-  <!-- parte informativa -->
+  <!-- parte informativa con foto cadena restaurante-->
   <div class="introSection">
     <div class="container">
       <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-4">
           <h3>Nuestra cadena</h3>
           <p>
             Con una larga experiencia en el sector, nuestra cadena de restaurantes se carácteriza por unas instalaciones 
             cómodas y amplias.
-            Disponemos de zona infantil con servicio de ludoteca. <br><br>
+             <br><br>
             Todos nuestros productos son de gran calidad y nuestros proveedores locales.
           </p>
         </div>
-
-        <div class="col-lg-7">
-          <img id="fotoRestaurante" alt="foto restaurante" src="themes/assets/images/fondoRestaurante.jpg"/> 
+        <div class="col-lg-4">
+          <h3>Instalaciones</h3>
+          <p>
+            Disponemos de zona infantil con servicio de ludoteca. <br><br>
+            Climatizado y adaptado a personas con movilidad reducida.
+          </p>
         </div>
 
-        
-
+        <div class="col-lg-4">
+          <img id="fotoRestaurante" alt="foto restaurante" src="themes/assets/images/fondoRestaurante.jpg"/> 
+        </div>
       </div>
     </div>
   </div>
 
-
- 
-    
-  <!-- /END THE FEATURETTES -->
-
-
-  <!-- FOOTER -->
+  <!--footer-->
   <footer>
     <div class="container">
       <p class="pull-right"><a href="#">subir arriba</a></p>
@@ -307,12 +171,15 @@ y acceso al menu principal-->
 
   
 
-
-  <!-- Bootstrap core JavaScript
-    ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
+  <!-- jquery para navegadores viejos -->
   <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+
+
+  <!-- adjunto jquery mas actual tambien porque me daba problemas Mozilla Firefox con la versión anterior de jquery-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- bootstrap-->
   <script src="themes/dist/js/bootstrap.min.js"></script>
+  <!-- placeholder rellenar huecos imagenes-->
   <script src="themes/assets/js/holder.js"></script>
   
 
@@ -325,7 +192,7 @@ y acceso al menu principal-->
     - dentro de miRestaurante.js tengo import ManagerApp from './manager/managerApp.js'
     el cual accedera al resto de los script del manager,vita,controlador;
   -->
-	<script src="./js/MiRestaurante/miRestaurante.js" type="module"></script>
+	<script src="js/MiRestaurante/miRestaurante.js" type="module"></script>
 
 
 </body>

@@ -1,15 +1,13 @@
-/* GLOBAL STYLES
--------------------------------------------------- */
-/* Padding below the footer and lighter body text */
+/* css general*/
+
 
 body {
   color: #5a5a5a;
 }
 
-/* CUSTOMIZE THE NAVBAR
--------------------------------------------------- */
 
-/* Special class on .container surrounding .navbar, used for positioning it into place. */
+
+/*menu navegacion cabecera*/
 .navbar-wrapper {
   position: absolute;
   top: 0;
@@ -17,8 +15,6 @@ body {
   right: 0;
   z-index: 20;
 }
-
-/* Flip around the padding for proper display in narrow viewports */
 .navbar-wrapper .container {
   padding-left: 0;
   padding-right: 0;
@@ -29,19 +25,17 @@ body {
 }
 
 
-/* CUSTOMIZE THE CAROUSEL
--------------------------------------------------- */
+/* carrusel*/
 
-/* Carousel base class */
 #mainCarousel .carousel {
   height: 450px;
 }
-/* Since positioning the image, we need to help out the caption */
+
 #mainCarousel  .carousel-caption {
   z-index: 10;
 }
 
-/* Declare heights because of positioning of img element */
+
 #mainCarousel  .carousel .item {
   height: 450px;
   background-color: #777;
@@ -65,7 +59,6 @@ body {
   padding-right: 15px;
 }
 
-/* Center align the text within the three columns below the carousel */
 .marketing .col-lg-4 {
   text-align: center;
   margin-bottom: 20px;
@@ -79,22 +72,17 @@ body {
 }
 
 
-/* Featurettes
-------------------------- */
 
 .featurette-divider {
-  margin: 80px 0; /* Space out the Bootstrap <hr> more */
+  margin: 80px 0; 
 }
 
-/* Thin out the marketing headings */
 .featurette-heading {
   font-weight: 300;
   line-height: 1;
   letter-spacing: -1px;
 }
 
-
-/* Custom CSS =========================================== */
 .navbar-inverse {background-color: #efefef; border-color: #FF5200;}
 .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover, .navbar-inverse .navbar-nav>.open>a:focus,
 .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus {color: #fff; background-color: #c83a3a;}
@@ -106,6 +94,7 @@ a{color:#fff}
 a:hover{color:#eee}
 .marketing img{max-width:100%}
 .carousel-caption {color: #000000;}
+
 .carousel-caption  h1{background-color: #eb4800;color: #fff;display:inline-block;padding:4px 18px; width: auto;-ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=80)';opacity: 0.8;}
 .dsc {background-color: #757575;color: #fff;display: inline-block;padding: 4px 18px; width: auto; -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=80)';opacity: 0.8;}
 .highlightSection{padding:28px 0}
@@ -136,10 +125,8 @@ footer{padding:18px 0; background:#111; color:#fff; font-size:large;}
 
 
 
+
 /*ficha carácteristicas platos*/
-
-
-
 #divFichaPlato{
   border: #c83a3a;
   margin-bottom: 20px;
@@ -219,23 +206,35 @@ footer{padding:18px 0; background:#111; color:#fff; font-size:large;}
   color: #C83A3A;
 } 
 
+.introSection{
+  border: #c83a3a;
+  margin-bottom: 20px;
+  font-size: 21px;
+  line-height: 1.4;
+  
+}
+
+.introSection h3{
+  color: #C83A3A;
+  font-size: 30px;
+  
+}
 
 
 
 
 
 
-/* RESPONSIVE CSS
--------------------------------------------------- */
+/* ajuste responsive*/
 
 @media (min-width: 768px) {
 
-  /* Remove the edge padding needed for mobile */
+  
   .marketing {
     padding-left: 0;
     padding-right: 0;
   }
-  /* Navbar positioning foo */
+  
   .navbar-wrapper {
     margin-top: 20px;
   }
@@ -248,12 +247,10 @@ footer{padding:18px 0; background:#111; color:#fff; font-size:large;}
     padding-right: 0;
   }
 
-  /* The navbar becomes detached from the top, so we round the corners */
   .navbar-wrapper .navbar {
     border-radius: 4px;
   }
 
-  /* Bump up size of carousel content */
   .carousel-caption p {
     margin-bottom: 20px;
     font-size: 21px;

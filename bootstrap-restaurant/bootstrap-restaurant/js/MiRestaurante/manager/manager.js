@@ -1091,6 +1091,7 @@ const Manager = (function () {
 
             // validacion si existen argumentos de entrada 
             if (arguments.length === 0) {
+                console.log(arguments); // no argumentos
                 throw new ObjecManagerException('argument', 'category');
             }
 
@@ -1134,6 +1135,7 @@ const Manager = (function () {
 
             // validacion si existen argumentos de entrada 
             if (arguments.length === 0) {
+                console.log(arguments); // no argumentos
                 throw new ObjecManagerException('argument', 'allerge');
             }
             //validamos instancia y null
@@ -1169,6 +1171,7 @@ const Manager = (function () {
 
         // validacion si existen argumentos de entrada 
         if (arguments.length === 0) {
+            console.log(arguments); // no argumentos
             throw new ObjecManagerException('argument', 'menu');
         }
         //validamos instancia y null
