@@ -374,14 +374,9 @@ class ManagerView {
   bindMostrarFichaPlato(handler) {
     const platos = document.getElementById('product-list');
     
-
-
     //para mi ejericio
     const links = platos.querySelectorAll('a h3');
 
-    console.log("contenido html enlaces desde el nomre"+links);
-    
-    
     // asigno manejador a los enlaces del nombre
     for (const link of links) {
       link.addEventListener('click', (event) => {
@@ -396,16 +391,10 @@ class ManagerView {
         );
       });
     }
-    //const images = productList.querySelectorAll('figcaption a');
 
     //para mi ejercicio
     const images = platos.querySelectorAll('a');
 
-    console.log("contenido html enlace desde imagenes");
-    console.log(images);
-
-
-    
     // asigno manejador a los enlaces desde la imagen pasandole el atributo serial desde currentTarget
     for (const image of images) {
       image.addEventListener('click', (event) => {
