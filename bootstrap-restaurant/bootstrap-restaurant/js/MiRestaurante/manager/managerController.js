@@ -35,19 +35,19 @@
       // a) creo 3 categorias
       /*p1 = Manager.getInstance().createCategory('entrante', 'Categoria que hace referencia a pequeños platos previos al primerPlato');
        asi lo hacia en la practica 4, ahora this[MODEL] contiene Manager.getInstance()*/
-      const categoriaPrimer = this[MODEL].createCategory('primerPlato', 'siempre tendra ensalada, pasta o arroz','themes/assets/images/primerPlato.png');
-      const categoriaSegundo = this[MODEL].createCategory('segundoPlato', 'siempre tendra un pescado y una carne','themes/assets/images/segundoPlato.png');
-      const categoriaPostre = this[MODEL].createCategory('postre', 'siempre habra un postre casero','themes/assets/images/postre.png');
+      const categoriaPrimer = this[MODEL].createCategory('primerPlato', 'siempre tendra ensalada, pasta o arroz','bootstrap-restaurant/bootstrap-restaurant/themes/assets/images/primerPlato.png');
+      const categoriaSegundo = this[MODEL].createCategory('segundoPlato', 'siempre tendra un pescado y una carne','bootstrap-restaurant/bootstrap-restaurant/themes/assets/images/segundoPlato.png');
+      const categoriaPostre = this[MODEL].createCategory('postre', 'siempre habra un postre casero','bootstrap-restaurant/bootstrap-restaurant/themes/assets/images/postre.png');
       // a) creo platos 
-      const plato1 = this[MODEL].createDish('macarrones', 'macarrones con tomates gratinados al horno', ['tomate', 'carne picada', 'queso gratinado'], 'themes/assets/images/macarrones.png');
-      const plato2 = this[MODEL].createDish('sopa pescado', 'con trocitos de pescado de temporada', ['pescaado temporada', 'fideos', 'repollo', 'cebolla', 'apio'], 'themes/assets/images/sopaPescado.png');
-      const plato3 = this[MODEL].createDish('solomillo', 'con nuestro toque a la pimienta', ['solomillo', 'nata', 'cebolla'], 'themes/assets/images/solomillo.png');
-      const plato4 = this[MODEL].createDish('helado a la albahaca', 'con 2 bolas de limon y otra de nata y su insuperable aroma a albahaca natural', ['helado limon', 'albahaca','nata', 'azucar'], 'themes/assets/images/heladoAlbahaca.png');
-      const plato5 = this[MODEL].createDish('frutaVariada', 'distintas frutas variadas de temporada', ['naranja', 'platano'], 'themes/assets/images/frutaVariada.png');
-      const plato6 = this[MODEL].createDish('ensalada de pollo', 'ensalada al estilo castellano, de la huerta y de la granja a nuestra mesa', ['lechuga', 'tomate', 'pollo'], 'themes/assets/images/ensaladaPollo.png');
-      const plato7 = this[MODEL].createDish('bizcocho de la casa', 'casero con los mejores ingredientes naturales', ['bizcocho', 'sirope naranja'], 'themes/assets/images/bizcocho.png');
-      const plato8 = this[MODEL].createDish('lubina', 'a la espalda con salsa de naranja valenciana', ['lubina', 'sal', 'naranja'], 'themes/assets/images/lubina.png');
-      const plato9 = this[MODEL].createDish('entrecot', 'al gusto, carne 100% gallega', ['entrecot', 'sal'], 'themes/assets/images/entrecot.png');
+      const plato1 = this[MODEL].createDish('macarrones', 'macarrones con tomates gratinados al horno', ['tomate', 'carne picada', 'queso gratinado'], 'bootstrap-restaurant/bootstrap-restaurant/themes/assets/images/macarrones.png');
+      const plato2 = this[MODEL].createDish('sopa pescado', 'con trocitos de pescado de temporada', ['pescaado temporada', 'fideos', 'repollo', 'cebolla', 'apio'], 'bootstrap-restaurant/bootstrap-restaurant/themes/assets/images/sopaPescado.png');
+      const plato3 = this[MODEL].createDish('solomillo', 'con nuestro toque a la pimienta', ['solomillo', 'nata', 'cebolla'], 'bootstrap-restaurant/bootstrap-restaurant/themes/assets/images/solomillo.png');
+      const plato4 = this[MODEL].createDish('helado a la albahaca', 'con 2 bolas de limon y otra de nata y su insuperable aroma a albahaca natural', ['helado limon', 'albahaca','nata', 'azucar'], 'bootstrap-restaurant/bootstrap-restaurant/themes/assets/images/heladoAlbahaca.png');
+      const plato5 = this[MODEL].createDish('frutaVariada', 'distintas frutas variadas de temporada', ['naranja', 'platano'], 'bootstrap-restaurant/bootstrap-restaurant/themes/assets/images/frutaVariada.png');
+      const plato6 = this[MODEL].createDish('ensalada de pollo', 'ensalada al estilo castellano, de la huerta y de la granja a nuestra mesa', ['lechuga', 'tomate', 'pollo'], 'bootstrap-restaurant/bootstrap-restaurant/themes/assets/images/ensaladaPollo.png');
+      const plato7 = this[MODEL].createDish('bizcocho de la casa', 'casero con los mejores ingredientes naturales', ['bizcocho', 'sirope naranja'], 'bootstrap-restaurant/bootstrap-restaurant/themes/assets/images/bizcocho.png');
+      const plato8 = this[MODEL].createDish('lubina', 'a la espalda con salsa de naranja valenciana', ['lubina', 'sal', 'naranja'], 'bootstrap-restaurant/bootstrap-restaurant/themes/assets/images/lubina.png');
+      const plato9 = this[MODEL].createDish('entrecot', 'al gusto, carne 100% gallega', ['entrecot', 'sal'], 'bootstrap-restaurant/bootstrap-restaurant/themes/assets/images/entrecot.png');
       
       // a) añado 4 platos a cada categoria
 
