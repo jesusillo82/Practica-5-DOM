@@ -242,6 +242,30 @@ footer{padding:18px 0; background:#111; color:#fff; font-size:large;}
   
 }
 
+/* Ajuste de imágenes de categorías y platos */
+#category-list .media,
+#product-list .media {
+  text-align: center;
+}
+
+#category-list .media a,
+#product-list .media a {
+  display: block;
+  text-align: center;
+}
+
+#category-list .media img,
+#product-list .media img,
+#single-product #main-image {
+  display: block;
+  width: 100%;
+  max-width: 180px;
+  height: 180px;
+  margin: 0 auto 12px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
 /* ajuste responsive*/
 @media (max-width: 767px) {
   #myCarousel4 .featurette {
@@ -263,6 +287,14 @@ footer{padding:18px 0; background:#111; color:#fff; font-size:large;}
 
   #myCarousel4 .item img {
     max-height: 250px;
+  }
+
+  #category-list .media img,
+  #product-list .media img,
+  #single-product #main-image {
+    max-width: 110px;
+    height: 110px;
+    border-radius: 8px;
   }
 }
 
@@ -299,6 +331,15 @@ footer{padding:18px 0; background:#111; color:#fff; font-size:large;}
     font-size: 50px;
   }
 
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  #category-list .media img,
+  #product-list .media img,
+  #single-product #main-image {
+    max-width: 140px;
+    height: 140px;
+  }
 }
 
 @media (min-width: 992px) {
